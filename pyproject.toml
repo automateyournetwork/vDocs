@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "vdocs"
-version = "2.0.2"
+version = "0.1.1"
 description = "Business ready documents from Cisco SD-WAN vManage"
 authors = ["John Capobianco <ptcapo@gmail.com>"]
 packages = [{ include = "vdocs", from = "src"}]
