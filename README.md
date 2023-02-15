@@ -4,6 +4,14 @@ Business Ready Documents for Cisco SD-WAN vManage
 
 ## Current API Coverage
 
+Device Status
+
+Device Counters
+
+Fabric Devices
+
+Template Features
+
 ## Installation
 
 ```console
