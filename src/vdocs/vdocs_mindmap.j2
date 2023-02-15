@@ -1,0 +1,93 @@
+{%- if api == "/dataservice/device" %}
+# Fabric Devices
+{%-     for device in data_to_template['data'] %}
+## Hostname: {{ device['host-name'] }}
+### Device ID: {{ device.deviceId }}
+### Board Serial: {{ device['board-serial'] }}
+### Certificate Validity: {{ device['certificate-validity'] }}
+### Connected vManages: {{ device.connectedVManages | replace("\\","") | replace('"','') | replace(","," ") | replace("'","") | replace("[","") | replace("]","") }}
+### Control Connections: {{ device.controlConnections }}
+### Device
+#### Groups: {{ device['device-groups'] | replace("\\","") | replace('"','') | replace(","," ") | replace("'","") | replace("[","") | replace("]","") }}
+#### Model: {{ device['device-model'] }}
+#### OS: {{ device['device-os'] }}
+#### Type: {{ device['device-type'] }}
+#### Is Device Geo Data: {{ device.isDeviceGeoData }}
+### Domain ID: {{ device['domain-id'] }}
+### Last Updated: {{ device.lastupdated }}
+### Location
+#### Latitude: {{ device.latitude }}
+#### Longitude: {{ device.longitude }}
+### Layout Level: {{ device.layoutLevel }}
+### Local System IP: {{ device['local-system-ip'] }}
+### Max Controllers: {{ device['max-controllers'] }}
+### Model SKU: {{ device.model_sku }}
+### Personality: {{ device.personality }}
+### Platform: {{ device.platform }}
+### Reachability: {{ device.reachability }}
+### Site ID: {{ device['site-id'] }}
+### State: {{ device.state }}
+### Description: {{ device.state_description }}
+### Status: {{ device.status }}
+### Status Order: {{ device.statusOrder }}
+### System IP: {{ device['system-ip'] }}
+### Testbed Mode: {{ device.testbed_mode }}
+### Timezone: {{ device.timezone }}
+### Total CPU Count: {{ device.total_cpu_count }}
+### Update Date: {{ device['uptime-date'] }}
+### UUID: {{ device.uuid }}
+### Validity: {{ device.validity }}
+### Version: {{ device.version }}
+{%-     endfor %}
+{%- elif api == "/dataservice/device/monitor"%}
+# Device Status
+{%-     for device in data_to_template['data'] %}
+## Hostname: {{ device['host-name'] }}
+### Device Model: {{ device['device-model'] }}
+### Device Type: {{ device['device-type'] }}
+### Layout Level: {{ device.layoutLevel }}
+### Site ID: {{ device['site-id'] }}
+### Status: {{ device.status }}
+### System IP: {{ device['system-ip'] }}
+{%-     endfor %}
+{%- elif api == "/dataservice/device/counters"%}
+# Device Counters
+{%-     for device in data_to_template['data'] %}
+## System IP: {{ device['system-ip'] }}
+### BFD Sessions
+#### Down: {{ device.bfdSessionsDown | default("N/A") }}
+#### Up: {{ device.bfdSessionsUp | default("N/A") }}
+### Crash Count: {{ device.crashCount }}
+### Connections
+#### Expected Control: {{ device.expectedControlConnections | default("N/A") }}
+#### Actual Control: {{ device['number-vsmart-control-connections'] }}
+### OMP Peers
+#### Down: {{ device.ompPeersDown | default("N/A") }}
+#### Up: {{ device.ompPeersUp | default("N/A") }}
+### Reboot Count: {{ device.rebootCount }}
+{%-     endfor %}
+{%- elif api == "/dataservice/template/feature"%}
+# Template Features
+{%-     for template in data_to_template['data'] %}
+## Template Name: {{ template.templateName }}
+### Attached Masters Counter: {{ template.attachedMastersCount }}
+### Config Type: {{ template.configType }}
+### Created
+#### By: {{ template.createdBy }}
+#### On: {{ template.createdOn }}
+### Devices Attached: {{ template.devicesAttached }}
+### Factory Default: {{ template.factoryDefault }}
+### Last Updated
+#### By: {{ template.lastUpdatedBy }}
+#### On: {{ template.lastUpdatedOn }}
+### Template
+#### ID: {{ template.templateId }}
+#### Description: {{ template.templateDescription }}
+#### Min Version: {{ template.templateMinVersion }}
+#### Type: {{ template.templateType }}
+### Devices
+{%-         for device in template['deviceType'] %}
+#### {{ device }}
+{%-         endfor %}
+{%-     endfor %}
+{%- endif %}

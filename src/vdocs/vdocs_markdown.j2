@@ -1,0 +1,27 @@
+{%- if api == "/dataservice/device" %}# Fabric Devices 
+| Hostname | Device ID | Board Serial | Certificate Validity | Connected vManages | Control Connections | Device Groups | Device Model | Device OS | Device Type | Domain ID | Is Device Geo Data | Last Updated | Latitude | Longitude | Layout Level | Local System IP | Max Controllers | Model SKU | Personality | Platform | Reachability | Site ID | State | State Description | Status | Status Order | System IP | Testbed Mode | Timezone | Total CPU Count | Uptime Date | UUID | Validity | Version |
+| -------- | --------- | ------------ | -------------------- | ------------------ | ------------------- | ------------- | ------------ | --------- | ----------- | --------- | ------------------ | ------------ | -------- | --------- | ------------ | --------------- | --------------- | --------- | ----------- | -------- | ------------ | ------- | ----- | ----------------- | ------ | ------------ | --------- | ------------ | -------- | --------------- | ----------- | ---- | -------- | ------- |
+{%-     for device in data_to_template['data'] %}
+| {{ device['host-name'] }} | {{ device.deviceId }} | {{ device['board-serial'] }} | {{ device['certificate-validity'] }} | {{ device.connectedVManages | replace("\\","") | replace('"','') | replace(","," ") | replace("'","") | replace("[","") | replace("]","") }} | {{ device.controlConnections }} | {{ device['device-groups'] | replace("\\","") | replace('"','') | replace(","," ") | replace("'","") | replace("[","") | replace("]","") }} | {{ device['device-model'] }} | {{ device['device-os'] }} | {{ device['device-type'] }} | {{ device['domain-id'] }} | {{ device.isDeviceGeoData }} | {{ device.lastupdated }} | {{ device.latitude }} | {{ device.longitude }} | {{ device.layoutLevel }} | {{ device['local-system-ip'] }} | {{ device['max-controllers'] }} | {{ device.model_sku }} | {{ device.personality }} | {{ device.platform }} | {{ device.reachability }} | {{ device['site-id'] }} | {{ device.state }} | {{ device.state_description }} | {{ device.status }} | {{ device.statusOrder }} | {{ device['system-ip'] }} | {{ device.testbed_mode }} | {{ device.timezone }} | {{ device.total_cpu_count }} | {{ device['uptime-date'] }} | {{ device.uuid }} | {{ device.validity }} | {{ device.version }} |
+{%-     endfor %}
+{%- elif api == "/dataservice/device/monitor"%}# Device Status
+| Hostname | Device Model | Device Type | Layout Level | Site ID | Status | System IP |
+| -------- | ------------ | ----------- | ------------ | ------- | ------ | --------- |
+{%-     for device in data_to_template['data'] %}
+| {{ device['host-name'] }} | {{ device['device-model'] }} | {{ device['device-type'] }} | {{ device.layoutLevel }} | {{ device['site-id'] }} | {{ device.status }} | {{ device['system-ip'] }} |
+{%-     endfor %}
+{%- elif api == "/dataservice/device/counters"%}# Device Counters
+| System IP | BFD Sessions Down | BFD Sessions Up | Crash Count | Expected Control Connections | Number vSmart Control Connections | OMP Peers Down | OMP Peers Up | Reboot Count |
+| --------- | ----------------- | --------------- | ----------- | ---------------------------- | --------------------------------- | -------------- | ------------ | ------------ |
+{%-     for device in data_to_template['data'] %}
+| {{ device['system-ip'] }} | {{ device.bfdSessionsDown | default("N/A") }} | {{ device.bfdSessionsUp | default("N/A") }} | {{ device.crashCount }} | {{ device.expectedControlConnections | default("N/A") }} | {{ device['number-vsmart-control-connections'] }} | {{ device.ompPeersDown | default("N/A") }} | {{ device.ompPeersUp | default("N/A") }} | {{ device.rebootCount }} |
+{%-     endfor %}
+{%- elif api == "/dataservice/template/feature"%}# Template Features
+| Device Type | Template Name | Attached Masters Count | Config Type | Created By | Created On | Devices Attached | Factory Default | Last Updated By | Last Updated On | Template Description | Template ID | Template Min Version | Template Type | Template Definition |
+| ----------- | ------------- | ---------------------- | ----------- | ---------- | ---------- | ---------------- | --------------- | --------------- | --------------- | -------------------- | ----------- | -------------------- | ------------- | ------------------- |
+{%-     for template in data_to_template['data'] %}
+{%-         for device in template['deviceType'] %}
+| {{ device }} | {{ template.templateName }} | {{ template.attachedMastersCount }} | {{ template.configType }} | {{ template.createdBy }} | {{ template.createdOn }} | {{ template.devicesAttached }} | {{ template.factoryDefault }} | {{ template.lastUpdatedBy }} | {{ template.lastUpdatedOn }} | {{ template.templateDescription }} | {{ template.templateId }} | {{ template.templateMinVersion }} | {{ template.templateType }} | {{ template.templateDefinition }} |
+{%-         endfor %}
+{%-     endfor %}
+{%- endif %}

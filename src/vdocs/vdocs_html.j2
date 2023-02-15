@@ -1,0 +1,193 @@
+{%- include 'datatable_header.j2' %}
+{%- if api == "/dataservice/device" %}
+<h1>Fabric Devices</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>Hostname</th>
+    <th>Device ID</th>
+    <th>Board Serial</th>
+    <th>Certificate Validity</th>
+    <th>Connected vManages</th>
+    <th>Control Connections</th>
+    <th>Device Groups</th>
+    <th>Device Model</th>
+    <th>Device OS</th>
+    <th>Device Type</th>
+    <th>Domain ID</th>
+    <th>Is Device Geo Data</th>
+    <th>Last Updated</th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+    <th>Layout Level</th>
+    <th>Local System IP</th>
+    <th>Max Controllers</th>
+    <th>Model SKU</th>
+    <th>Personality</th>
+    <th>Platform</th>
+    <th>Reachability</th>
+    <th>Site ID</th>
+    <th>State</th>
+    <th>State Description</th>
+    <th>Status</th>
+    <th>Status Order</th>
+    <th>System IP</th>
+    <th>Testbed Mode</th>
+    <th>Timezone</th>
+    <th>Total CPU Count</th>
+    <th>Uptime Date</th>
+    <th>UUID</th>
+    <th>Validity</th>
+    <th>Version</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for device in data_to_template['data'] %}
+    <tr>
+        <td>{{ device['host-name'] }}</td>
+    <td>{{ device.deviceId }}</td>
+    <td>{{ device['board-serial'] }}</td>
+    <td>{{ device['certificate-validity'] }}</td>
+    <td>{{ device.connectedVManages | replace("\\","") | replace('"','') | replace(","," ") | replace("'","") | replace("[","") | replace("]","") }}</td>
+    <td>{{ device.controlConnections }}</td>
+    <td>{{ device['device-groups'] | replace("\\","") | replace('"','') | replace(","," ") | replace("'","") | replace("[","") | replace("]","") }}</td>
+    <td>{{ device['device-model'] }}</td>
+    <td>{{ device['device-os'] }}</td>
+    <td>{{ device['device-type'] }}</td>
+    <td>{{ device['domain-id'] }}</td>
+    <td>{{ device.isDeviceGeoData }}</td>
+    <td>{{ device.lastupdated }}</td>
+    <td>{{ device.latitude }}</td>
+    <td>{{ device.longitude }}</td>
+    <td>{{ device.layoutLevel }}</td>
+    <td>{{ device['local-system-ip'] }}</td>
+    <td>{{ device['max-controllers'] }}</td>
+    <td>{{ device.model_sku }}</td>
+    <td>{{ device.personality }}</td>
+    <td>{{ device.platform }}</td>
+    <td>{{ device.reachability }}</td>
+    <td>{{ device['site-id'] }}</td>
+    <td>{{ device.state }}</td>
+    <td>{{ device.state_description }}</td>
+    <td>{{ device.status }}</td>
+    <td>{{ device.statusOrder }}</td>
+    <td>{{ device['system-ip'] }}</td>
+    <td>{{ device.testbed_mode }}</td>
+    <td>{{ device.timezone }}</td>
+    <td>{{ device.total_cpu_count }}</td>
+    <td>{{ device['uptime-date'] }}</td>
+    <td>{{ device.uuid }}</td>
+    <td>{{ device.validity }}</td>
+    <td>{{ device.version }}</td>
+    </tr>
+{%-     endfor %}
+</tbody>
+</table>
+{%- elif api == "/dataservice/device/monitor"%}
+<h1>Device Status</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>Hostname</th>
+    <th>Device Model</th>
+    <th>Device Type</th>
+    <th>Layout Level</th>
+    <th>Site ID</th>
+    <th>Status</th>
+    <th>System IP</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for device in data_to_template['data'] %}
+  <tr>
+    <td>{{ device['host-name'] }}</td>
+    <td>{{ device['device-model'] }}</td>
+    <td>{{ device['device-type'] }}</td>
+    <td>{{ device.layoutLevel }}</td>
+    <td>{{ device['site-id'] }}</td>
+    <td>{{ device.status }}</td>
+    <td>{{ device['system-ip'] }}</td>
+  </tr>
+{%-     endfor %}
+</tbody>
+</table>
+{%- elif api == "/dataservice/device/counters"%}
+<h1>Device Counters</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>System IP</th>
+    <th>BFD Sessions Down</th>
+    <th>BFD Sessions Up</th>
+    <th>Crash Count</th>
+    <th>Expected Control Connections</th>
+    <th>Number vSmart Control Connections</th>
+    <th>OMP Peers Down</th>
+    <th>OMP Peers Up</th>
+    <th>Reboot Count</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for device in data_to_template['data'] %}
+  <tr>
+    <td>{{ device['system-ip'] }}</td>
+    <td>{{ device.bfdSessionsDown | default("N/A") }}</td>
+    <td>{{ device.bfdSessionsUp | default("N/A") }}</td>
+    <td>{{ device.crashCount }}</td>
+    <td>{{ device.expectedControlConnections | default("N/A") }}</td>
+    <td>{{ device['number-vsmart-control-connections'] }}</td>
+    <td>{{ device.ompPeersDown | default("N/A") }}</td>
+    <td>{{ device.ompPeersUp | default("N/A") }}</td>
+    <td>{{ device.rebootCount }}</td>
+  </tr>
+{%-     endfor %}
+</tbody>
+</table>
+{%- elif api == "/dataservice/template/feature"%}
+<h1>Template Features</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>Device Type</th>
+    <th>Template Name</th>
+    <th>Attached Masters Count</th>
+    <th>Config Type</th>
+    <th>Created By</th>
+    <th>Created On</th>
+    <th>Devices Attached</th>
+    <th>Factory Default</th>
+    <th>Last Updated By</th>
+    <th>Last Updated On</th>
+    <th>Template Description</th>
+    <th>Template ID</th>
+    <th>Template Min Version</th>
+    <th>Template Type</th>
+    <th>Template Definition</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for template in data_to_template['data'] %}
+{%-         for device in template['deviceType'] %}
+  <tr>
+    <td>{{ device }}</td>
+    <td>{{ template.templateName }}</td>
+    <td>{{ template.attachedMastersCount }}</td>
+    <td>{{ template.configType }}</td>
+    <td>{{ template.createdBy }}</td>
+    <td>{{ template.createdOn }}</td>
+    <td>{{ template.devicesAttached }}</td>
+    <td>{{ template.factoryDefault }}</td>
+    <td>{{ template.lastUpdatedBy }}</td>
+    <td>{{ template.lastUpdatedOn }}</td>
+    <td>{{ template.templateDescription }}</td>
+    <td>{{ template.templateId }}</td>
+    <td>{{ template.templateMinVersion }}</td>
+    <td>{{ template.templateType }}</td>
+    <td>{{ template.templateDefinition }}</td>
+  </tr>
+{%-         endfor %}
+{%-     endfor %}
+</tbody>
+</table>
+{%- endif %}
+{%- include 'datatable_footer.j2' %}
