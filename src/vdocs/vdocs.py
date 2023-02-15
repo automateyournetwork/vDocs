@@ -30,7 +30,8 @@ class vDocs():
         api_list = ['Fabric Devices',
                     'Device Status',
                     'Device Counters',
-                    'Template Features'
+                    'Template Features',
+                    'Template Feature Types'
                     ]
         current_directory = os.getcwd()
         for api in api_list:
@@ -61,7 +62,8 @@ class vDocs():
     api_list = ["/dataservice/device",
                 "/dataservice/device/monitor",
                 "/dataservice/device/counters",
-                "/dataservice/template/feature"
+                "/dataservice/template/feature",
+                "/dataservice/template/feature/types"
                 ]
 
     async def get_api(self, api_url):
@@ -93,6 +95,10 @@ class vDocs():
                 async with aiofiles.open('Template Features/JSON/Template Features.json', mode='w') as f:
                     await f.write(json.dumps(payload, indent=4, sort_keys=True))
 
+            if api == "/dataservice/template/feature/types":
+                async with aiofiles.open('Template Feature Types/JSON/Template Feature Types.json', mode='w') as f:
+                    await f.write(json.dumps(payload, indent=4, sort_keys=True))
+
     async def yaml_file(self, parsed_json):
         for api, payload in json.loads(parsed_json):
             clean_yaml = yaml.dump(payload, default_flow_style=False)
@@ -110,6 +116,10 @@ class vDocs():
 
             if api == "/dataservice/template/feature":
                 async with aiofiles.open('Template Features/YAML/Template Features.yaml', mode='w' ) as f:
+                    await f.write(clean_yaml)
+
+            if api == "/dataservice/template/feature/types":
+                async with aiofiles.open('Template Feature Types/YAML/Template Feature Types.yaml', mode='w' ) as f:
                     await f.write(clean_yaml)
 
     async def csv_file(self, parsed_json):
@@ -135,6 +145,10 @@ class vDocs():
                 async with aiofiles.open('Template Features/CSV/Template Features.csv', mode='w' ) as f:
                     await f.write(csv_output)
 
+            if api == "/dataservice/template/feature/types":
+                async with aiofiles.open('Template Feature Types/CSV/Template Feature Types.csv', mode='w' ) as f:
+                    await f.write(csv_output)
+
     async def markdown_file(self, parsed_json):
         template_dir = Path(__file__).resolve().parent
         env = Environment(loader=FileSystemLoader(str(template_dir)), enable_async=True)
@@ -156,6 +170,10 @@ class vDocs():
 
             if api == "/dataservice/template/feature":
                 async with aiofiles.open('Template Features/Markdown/Template Features.md', mode='w' ) as f:
+                    await f.write(markdown_output)
+
+            if api == "/dataservice/template/feature/types":
+                async with aiofiles.open('Template Feature Types/Markdown/Template Feature Types.md', mode='w' ) as f:
                     await f.write(markdown_output)
 
     async def html_file(self, parsed_json):
@@ -181,6 +199,10 @@ class vDocs():
                 async with aiofiles.open('Template Features/HTML/Template Features.html', mode='w' ) as f:
                     await f.write(html_output)
 
+            if api == "/dataservice/template/feature/types":
+                async with aiofiles.open('Template Feature Types/HTML/Template Feature Types.html', mode='w' ) as f:
+                    await f.write(html_output)
+
     async def mindmap_file(self, parsed_json):
         template_dir = Path(__file__).resolve().parent
         env = Environment(loader=FileSystemLoader(str(template_dir)), enable_async=True)
@@ -202,6 +224,10 @@ class vDocs():
 
             if api == "/dataservice/template/feature":
                 async with aiofiles.open('Template Features/Mindmap/Template Features.md', mode='w' ) as f:
+                    await f.write(mindmap_output)
+
+            if api == "/dataservice/template/feature/types":
+                async with aiofiles.open('Template Feature Types/Mindmap/Template Feature Types.md', mode='w' ) as f:
                     await f.write(mindmap_output)
 
     async def all_files(self, parsed_json):

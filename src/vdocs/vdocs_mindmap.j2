@@ -90,4 +90,19 @@
 #### {{ device }}
 {%-         endfor %}
 {%-     endfor %}
+{%- elif api == "/dataservice/template/feature/types"%}
+# Template Feature Types
+{%-     for type in data_to_template['data'] %}
+## Name: {{ type.name }}
+### Display Name: {{ type.displayName }}
+### Default: {{ type.default }}
+### Description: {{ type.description }}
+### Helper Type: {{ type.helperType }}
+### Parent: {{ type.parent }}
+### Type Class: {{ type.typeClass }}
+### Models
+{%-         for device_model in type['deviceModels'] %}
+#### {{ device_model.name }}
+{%-         endfor %}
+{%-     endfor %}
 {%- endif %}

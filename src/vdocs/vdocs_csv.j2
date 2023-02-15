@@ -16,4 +16,10 @@
 {{ device }},{{ template.templateName }},{{ template.attachedMastersCount }},{{ template.configType }},{{ template.createdBy }},{{ template.createdOn }},{{ template.devicesAttached }},{{ template.factoryDefault }},{{ template.lastUpdatedBy }},{{ template.lastUpdatedOn }},{{ template.templateDescription }},{{ template.templateId }},{{ template.templateMinVersion }},{{ template.templateType }},{{ template.templateDefinition }}
 {%-         endfor %}
 {%-     endfor %}
+{%- elif api == "/dataservice/template/feature/types"%}Name,Display Name,Default,Description,Device Models,Helper Type,Parent,Type Class
+{%-     for type in data_to_template['data'] %}
+{%-         for device_model in type['deviceModels'] %}
+{{ type.name }},{{ type.displayName }},{{ type.default }},{{ type.description }},{{ device_model.name }},{{ type.helperType | replace(","," ") }},{{ type.parent }},{{ type.typeClass }}
+{%-         endfor %}
+{%-     endfor %}
 {%- endif %}

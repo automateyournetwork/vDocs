@@ -189,5 +189,37 @@
 {%-     endfor %}
 </tbody>
 </table>
+{%- elif api == "/dataservice/template/feature/types"%}
+<h1>Template Feature Types</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>Name</th>
+    <th>Display Name</th>
+    <th>Default</th>
+    <th>Description</th>
+    <th>Device Models</th>
+    <th>Helper Type</th>
+    <th>Parent</th>
+    <th>Type Class</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for type in data_to_template['data'] %}
+{%-         for device_model in type['deviceModels'] %}
+  <tr>
+    <td>{{ type.name }}</td>
+    <td>{{ type.displayName }}</td>
+    <td>{{ type.default }}</td>
+    <td>{{ type.description }}</td>
+    <td>{{ device_model.name }}</td>
+    <td>{{ type.helperType }}</td>
+    <td>{{ type.parent }}</td>
+    <td>{{ type.typeClass }}</td>
+  </tr>
+{%-         endfor %}
+{%-     endfor %}
+</tbody>
+</table>
 {%- endif %}
 {%- include 'datatable_footer.j2' %}

@@ -12,6 +12,8 @@ Fabric Devices
 
 Template Features
 
+Template Feature Types
+
 ## Installation
 
 ```console
