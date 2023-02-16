@@ -310,4 +310,25 @@
 #### Data Key: {{ device['vdevice-dataKey'] }}
 ### vManage System IP: {{ device['vmanage-system-ip'] }}
 {%-     endfor %}
+{%- elif api == "/dataservice/data/device/state/HardwareInventory"%}
+# Hardware Inventory
+{%-     for device in data_to_template['data'] %}
+## @RID: {{ device['@rid'] }}
+### Timestamps
+#### Created: {{ device.createTimeStamp }}
+#### Last Updated: {{ device.lastupdated }}
+### Hardware
+#### Description: {{ device['hw-description'] }}
+#### Dev Index: {{ device['hw-dev-index'] }}
+#### Type: {{ device['hw-type'] }}
+#### Part Number: {{ device['part-number'] }}
+### Record ID: {{ device.recordId }}
+### Serial Number: {{ device['serial-number'] }}
+### vDevice
+#### Hostname: {{ device['vdevice-host-name'] }}
+#### Name: {{ device['vdevice-name'] }}
+#### Data Key: {{ device['vdevice-dataKey'] }}
+### Version: {{ device.version }}
+### vManage System IP: {{ device['vmanage-system-ip'] }}
+{%-     endfor %}
 {%- endif %}

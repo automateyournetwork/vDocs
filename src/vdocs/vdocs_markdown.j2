@@ -79,4 +79,10 @@
 {%-     for device in data_to_template['data'] %}
 | {{ device['@rid'] }} | {{ device.createTimeStamp }} | {{ device['hw-class'] }} | {{ device['hw-dev-index'] }} | {{ device['hw-item'] }} | {{ device.lastupdated }} | {{ device.measurement }} | {{ device.recordId }} | {{ device.status }} | {{ device['vdevice-dataKey'] }} | {{ device['vdevice-host-name'] }} | {{ device['vdevice-name'] }} | {{ device['vmanage-system-ip'] }} |
 {%-     endfor %}
+{%- elif api == "/dataservice/data/device/state/HardwareInventory"%}# Hardware Inventory
+| @RID | Create Timestamp | Hardware Description | Hardware Dev Index | Hardware Type | Last Updated | Part Number | Record ID | Serial Number | vDevice Data Key | vDevice Hostname | vDevice Name | Version | vManage System IP |
+| ---- | ---------------- | -------------------- | ------------------ | ------------- | ------------ | ----------- | --------- | ------------- | ---------------- | ---------------- | ------------ | ------- | ----------------- |
+{%-     for device in data_to_template['data'] %}
+| {{ device['@rid'] }} | {{ device.createTimeStamp }} | {{ device['hw-description'] }} | {{ device['hw-dev-index'] }} | {{ device['hw-type'] }} | {{ device.lastupdated }} | {{ device['part-number'] }} | {{ device.recordId }} | {{ device['serial-number'] }} | {{ device['vdevice-dataKey'] }} | {{ device['vdevice-host-name'] }} | {{ device['vdevice-name'] }} | {{ device.version }} | {{ device['vmanage-system-ip'] }} |
+{%-     endfor %}
 {%- endif %}

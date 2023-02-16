@@ -661,5 +661,47 @@
 {%-     endfor %}
 </tbody>
 </table>
+{%- elif api == "/dataservice/data/device/state/HardwareInventory"%}
+<h1>Hardware Inventory</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>@RID</th>
+    <th>Create Timestamp</th>
+    <th>Hardware Description</th>
+    <th>Hardware Dev Index</th>
+    <th>Hardware Type</th>
+    <th>Last Updated</th>
+    <th>Part Number</th>
+    <th>Record ID</th>
+    <th>Serial Number</th>
+    <th>vDevice Data Key</th>
+    <th>vDevice Hostname</th>
+    <th>vDevice Name</th>
+    <th>Version</th>
+    <th>vManage System IP</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for device in data_to_template['data'] %}
+  <tr>
+    <td>{{ device['@rid'] }}</td>
+    <td>{{ device.createTimeStamp }}</td>
+    <td>{{ device['hw-description'] }}</td>
+    <td>{{ device['hw-dev-index'] }}</td>
+    <td>{{ device['hw-type'] }}</td>
+    <td>{{ device.lastupdated }}</td>
+    <td>{{ device['part-number'] }}</td>
+    <td>{{ device.recordId }}</td>
+    <td>{{ device['serial-number'] }}</td>
+    <td>{{ device['vdevice-dataKey'] }}</td>
+    <td>{{ device['vdevice-host-name'] }}</td>
+    <td>{{ device['vdevice-name'] }}</td>
+    <td>{{ device.version }}</td>
+    <td>{{ device['vmanage-system-ip'] }}</td>
+  </tr>
+{%-     endfor %}
+</tbody>
+</table>
 {%- endif %}
 {%- include 'datatable_footer.j2' %}
