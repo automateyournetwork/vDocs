@@ -20,6 +20,8 @@ Fabric Devices
 
 Hardware Environment
 
+Hardware Inventory
+
 Template Feature Types
 
 Template Features

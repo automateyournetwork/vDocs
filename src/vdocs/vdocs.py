@@ -35,6 +35,7 @@ class vDocs():
                     'Device Counters',
                     'Fabric Devices',
                     'Hardware Environment',
+                    'Hardware Inventory',
                     'Template Features',
                     'Template Feature Types',
                     'Template Policy List',
@@ -70,7 +71,8 @@ class vDocs():
                 "/dataservice/data/device/state/ControlConnection",
                 "/dataservice/data/device/state/ControlLocalProperty",
                 "/dataservice/data/device/state/ControlWanInterface",
-                '/dataservice/data/device/state/HardwareEnvironment',
+                "/dataservice/data/device/state/HardwareEnvironment",
+                "/dataservice/data/device/state/HardwareInventory",
                 "/dataservice/device",
                 "/dataservice/device/monitor",
                 "/dataservice/device/counters",
@@ -141,6 +143,10 @@ class vDocs():
                 async with aiofiles.open('Hardware Environment/JSON/Hardware Environment.json', mode='w') as f:
                     await f.write(json.dumps(payload, indent=4, sort_keys=True))
 
+            if api == "/dataservice/data/device/state/HardwareInventory":
+                async with aiofiles.open('Hardware Inventory/JSON/Hardware Inventory.json', mode='w') as f:
+                    await f.write(json.dumps(payload, indent=4, sort_keys=True))
+
     async def yaml_file(self, parsed_json):
         for api, payload in json.loads(parsed_json):
             clean_yaml = yaml.dump(payload, default_flow_style=False)
@@ -190,6 +196,10 @@ class vDocs():
 
             if api == "/dataservice/data/device/state/HardwareEnvironment":
                 async with aiofiles.open('Hardware Environment/YAML/Hardware Environment.yaml', mode='w' ) as f:
+                    await f.write(clean_yaml)
+
+            if api == "/dataservice/data/device/state/HardwareInventory":
+                async with aiofiles.open('Hardware Inventory/YAML/Hardware Inventory.yaml', mode='w' ) as f:
                     await f.write(clean_yaml)
 
     async def csv_file(self, parsed_json):
@@ -247,6 +257,10 @@ class vDocs():
                 async with aiofiles.open('Hardware Environment/CSV/Hardware Environment.csv', mode='w' ) as f:
                     await f.write(csv_output)
 
+            if api == "/dataservice/data/device/state/HardwareInventory":
+                async with aiofiles.open('Hardware Inventory/CSV/Hardware Inventory.csv', mode='w' ) as f:
+                    await f.write(csv_output)
+
     async def markdown_file(self, parsed_json):
         template_dir = Path(__file__).resolve().parent
         env = Environment(loader=FileSystemLoader(str(template_dir)), enable_async=True)
@@ -301,6 +315,10 @@ class vDocs():
             if api == "/dataservice/data/device/state/HardwareEnvironment":
                 async with aiofiles.open('Hardware Environment/Markdown/Hardware Environment.md', mode='w' ) as f:
                     await f.write(markdown_output)
+
+            if api == "/dataservice/data/device/state/HardwareInventory":
+                async with aiofiles.open('Hardware Inventory/Markdown/Hardware Inventory.md', mode='w' ) as f:
+                    await f.write(markdown_output)                    
 
     async def html_file(self, parsed_json):
         template_dir = Path(__file__).resolve().parent
@@ -357,6 +375,10 @@ class vDocs():
                 async with aiofiles.open('Hardware Environment/HTML/Hardware Environment.html', mode='w' ) as f:
                     await f.write(html_output)
 
+            if api == "/dataservice/data/device/state/HardwareInventory":
+                async with aiofiles.open('Hardware Inventory/HTML/Hardware Inventory.html', mode='w' ) as f:
+                    await f.write(html_output)
+
     async def mindmap_file(self, parsed_json):
         template_dir = Path(__file__).resolve().parent
         env = Environment(loader=FileSystemLoader(str(template_dir)), enable_async=True)
@@ -410,6 +432,10 @@ class vDocs():
 
             if api == "/dataservice/data/device/state/HardwareEnvironment":
                 async with aiofiles.open('Hardware Environment/Mindmap/Hardware Environment.md', mode='w' ) as f:
+                    await f.write(mindmap_output)
+
+            if api == "/dataservice/data/device/state/HardwareInventory":
+                async with aiofiles.open('Hardware Inventory/Mindmap/Hardware Inventory.md', mode='w' ) as f:
                     await f.write(mindmap_output)
 
     async def all_files(self, parsed_json):
