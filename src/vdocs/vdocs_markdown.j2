@@ -32,4 +32,21 @@
 | {{ type.name }} | {{ type.displayName }} | {{ type.default }} | {{ type.description }} | {{ device_model.name }} | {{ type.helperType }} | {{ type.parent }} | {{ type.typeClass }} |
 {%-         endfor %}
 {%-     endfor %}
+{%- elif api == "/dataservice/template/policy/vedge/devices"%}# vEdge Devices
+| Hostname | Layout Level | Local System IP | Site ID | UUID |
+| -------- | ------------ | --------------- | ------- | ---- |
+{%-     for device in data_to_template['data'] %}
+| {{ device['host-name'] }} | {{ device.layoutLevel }} | {{ device['local-system-ip'] }} | {{ device['site-id'] }} | {{ device.uuid }} |
+{%-     endfor %}
+{%- elif api == "/dataservice/template/policy/list"%}# Template Policy List
+| Name | Description | Jitter | Latency | Loss | Application | VPN | Site ID | IP Prefix | Info Tag | Is Activated By VSmart | Last Updated | List ID | Owner | Read Only | Reference Count | Reference ID | Reference Type | Type | Version |
+| ---- | ----------- | ------ | ------- | ---- | ----------- | --- | ------- | --------- | -------- | ---------------------- | ------------ | ------- | ----- | --------- | --------------- | ------------ | -------------- | ---- | ------- |
+{%-     for policy in data_to_template['data'] %}
+{%-         for entry in policy['entries'] %}
+| {{ policy.name }} | {{ policy.description }} | {%- if "jitter" in entry %}{{ entry.jitter }} | {{ entry.latency }} | {{ entry.loss }} | N/A | N/A | N/A | N/A | {%- elif "app" in entry %}N/A | N/A | N/A | {{ entry.app }} | N/A | N/A | N/A | {%- elif "vpn" in entry %}N/A | N/A | N/A | N/A | {{ entry.vpn }} | N/A | N/A | {%- elif "siteId" in entry %}N/A | N/A | N/A | N/A | N/A | {{ entry.siteId }} | N/A | {%- elif "ipPrefix" in entry %}N/A | N/A | N/A | N/A | N/A | N/A | {{ entry.ipPrefix }}{%- endif %}{{ policy.infoTag }} | {{ policy.isActivatedByVsmart }} | {{ policy.lastUpdated }} | {{ policy.listId }} | {{ policy.owner }} | {{ policy.readOnly }} | {{ policy.referenceCount }} | N/A | N/A | {{ policy.type }} | {{ policy.version }} |
+{%-         endfor %}
+{%-         for reference in policy['references'] %}
+| {{ policy.name }} | {{ policy.description }} | N/A | N/A | N/A | N/A | N/A | N/A | N/A | {{ policy.infoTag }} | {{ policy.isActivatedByVsmart }} | {{ policy.lastUpdated }} | {{ policy.listId }} | {{ policy.owner }} | {{ policy.readOnly }} | {{ policy.referenceCount }} | {{ reference.id }} | {{ reference.type }} | {{ policy.type }} | {{ policy.version }} |
+{%-         endfor %}
+{%-     endfor %}
 {%- endif %}

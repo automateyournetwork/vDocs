@@ -31,7 +31,9 @@ class vDocs():
                     'Device Status',
                     'Device Counters',
                     'Template Features',
-                    'Template Feature Types'
+                    'Template Feature Types',
+                    'Template Policy List',
+                    'vEdge Devices'
                     ]
         current_directory = os.getcwd()
         for api in api_list:
@@ -63,7 +65,9 @@ class vDocs():
                 "/dataservice/device/monitor",
                 "/dataservice/device/counters",
                 "/dataservice/template/feature",
-                "/dataservice/template/feature/types"
+                "/dataservice/template/feature/types",
+                "/dataservice/template/policy/vedge/devices",
+                "/dataservice/template/policy/list"
                 ]
 
     async def get_api(self, api_url):
@@ -99,6 +103,14 @@ class vDocs():
                 async with aiofiles.open('Template Feature Types/JSON/Template Feature Types.json', mode='w') as f:
                     await f.write(json.dumps(payload, indent=4, sort_keys=True))
 
+            if api == "/dataservice/template/policy/vedge/devices":
+                async with aiofiles.open('vEdge Devices/JSON/vEdge Devices.json', mode='w') as f:
+                    await f.write(json.dumps(payload, indent=4, sort_keys=True))
+
+            if api == "/dataservice/template/policy/list":
+                async with aiofiles.open('Template Policy List/JSON/Template Policy List.json', mode='w') as f:
+                    await f.write(json.dumps(payload, indent=4, sort_keys=True))
+
     async def yaml_file(self, parsed_json):
         for api, payload in json.loads(parsed_json):
             clean_yaml = yaml.dump(payload, default_flow_style=False)
@@ -120,6 +132,14 @@ class vDocs():
 
             if api == "/dataservice/template/feature/types":
                 async with aiofiles.open('Template Feature Types/YAML/Template Feature Types.yaml', mode='w' ) as f:
+                    await f.write(clean_yaml)
+
+            if api == "/dataservice/template/policy/vedge/devices":
+                async with aiofiles.open('vEdge Devices/YAML/vEdge Devices.yaml', mode='w' ) as f:
+                    await f.write(clean_yaml)
+
+            if api == "/dataservice/template/policy/list":
+                async with aiofiles.open('Template Policy List/YAML/Template Policy List.yaml', mode='w' ) as f:
                     await f.write(clean_yaml)
 
     async def csv_file(self, parsed_json):
@@ -149,6 +169,14 @@ class vDocs():
                 async with aiofiles.open('Template Feature Types/CSV/Template Feature Types.csv', mode='w' ) as f:
                     await f.write(csv_output)
 
+            if api == "/dataservice/template/policy/vedge/devices":
+                async with aiofiles.open('vEdge Devices/CSV/vEdge Devices.csv', mode='w' ) as f:
+                    await f.write(csv_output)
+
+            if api == "/dataservice/template/policy/list":
+                async with aiofiles.open('Template Policy List/CSV/Template Policy List.csv', mode='w' ) as f:
+                    await f.write(csv_output)
+
     async def markdown_file(self, parsed_json):
         template_dir = Path(__file__).resolve().parent
         env = Environment(loader=FileSystemLoader(str(template_dir)), enable_async=True)
@@ -174,6 +202,14 @@ class vDocs():
 
             if api == "/dataservice/template/feature/types":
                 async with aiofiles.open('Template Feature Types/Markdown/Template Feature Types.md', mode='w' ) as f:
+                    await f.write(markdown_output)
+
+            if api == "/dataservice/template/policy/vedge/devices":
+                async with aiofiles.open('vEdge Devices/Markdown/vEdge Devices.md', mode='w' ) as f:
+                    await f.write(markdown_output)
+
+            if api == "/dataservice/template/policy/list":
+                async with aiofiles.open('Template Policy List/Markdown/Template Policy List.md', mode='w' ) as f:
                     await f.write(markdown_output)
 
     async def html_file(self, parsed_json):
@@ -203,6 +239,14 @@ class vDocs():
                 async with aiofiles.open('Template Feature Types/HTML/Template Feature Types.html', mode='w' ) as f:
                     await f.write(html_output)
 
+            if api == "/dataservice/template/policy/vedge/devices":
+                async with aiofiles.open('vEdge Devices/HTML/vEdge Devices.html', mode='w' ) as f:
+                    await f.write(html_output)
+
+            if api == "/dataservice/template/policy/list":
+                async with aiofiles.open('Template Policy List/HTML/Template Policy List.html', mode='w' ) as f:
+                    await f.write(html_output)
+
     async def mindmap_file(self, parsed_json):
         template_dir = Path(__file__).resolve().parent
         env = Environment(loader=FileSystemLoader(str(template_dir)), enable_async=True)
@@ -228,6 +272,14 @@ class vDocs():
 
             if api == "/dataservice/template/feature/types":
                 async with aiofiles.open('Template Feature Types/Mindmap/Template Feature Types.md', mode='w' ) as f:
+                    await f.write(mindmap_output)
+
+            if api == "/dataservice/template/policy/vedge/devices":
+                async with aiofiles.open('vEdge Devices/Mindmap/vEdge Devices.md', mode='w' ) as f:
+                    await f.write(mindmap_output)
+
+            if api == "/dataservice/template/policy/list":
+                async with aiofiles.open('Template Policy List/Mindmap/Template Policy List.md', mode='w' ) as f:
                     await f.write(mindmap_output)
 
     async def all_files(self, parsed_json):

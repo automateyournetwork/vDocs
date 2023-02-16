@@ -221,5 +221,143 @@
 {%-     endfor %}
 </tbody>
 </table>
+{%- elif api == "/dataservice/template/policy/vedge/devices"%}
+<h1>vEdge Devices</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>Hostname</th>
+    <th>Layout Level</th>
+    <th>Local System IP</th>
+    <th>Site ID</th>
+    <th>UUID</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for device in data_to_template['data'] %}
+  <tr>
+    <td>{{ device['host-name'] }}</td>
+    <td>{{ device.layoutLevel }}</td>
+    <td>{{ device['local-system-ip'] }}</td>
+    <td>{{ device['site-id'] }}</td>
+    <td>{{ device.uuid }}</td>
+  </tr>
+{%-     endfor %}
+</tbody>
+</table>
+{%- elif api == "/dataservice/template/policy/list"%}
+<h1>Template Policy List</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Jitter</th>
+    <th>Latency</th>
+    <th>Loss</th>
+    <th>Application</th>
+    <th>VPN</th>
+    <th>Site ID</th>
+    <th>IP Prefix</th>
+    <th>Info Tag</th>
+    <th>Is Activated By VSmart</th>
+    <th>Last Updated</th>
+    <th>List ID</th>
+    <th>Owner</th>
+    <th>Read Only</th>
+    <th>Reference Count</th>
+    <th>Reference ID</th>
+    <th>Reference Type</th>
+    <th>Type</th>
+    <th>Version</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for policy in data_to_template['data'] %}
+{%-         for entry in policy['entries'] %}
+  <tr>
+    <td>{{ policy.name }}</td>
+    <td>{{ policy.description }}</td>
+    {%- if "jitter" in entry %}
+    <td>{{ entry.jitter }}</td>
+    <td>{{ entry.latency }}</td>
+    <td>{{ entry.loss }}</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    {%- elif "app" in entry %}
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>{{ entry.app }}</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    {%- elif "vpn" in entry %}
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>{{ entry.vpn }}</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    {%- elif "siteId" in entry %}
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>{{ entry.siteId }}</td>
+    <td>N/A</td>
+    {%- elif "ipPrefix" in entry %}
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>{{ entry.ipPrefix }}</td>
+    {%- endif %}
+    <td>{{ policy.infoTag }}</td>
+    <td>{{ policy.isActivatedByVsmart }}</td>
+    <td>{{ policy.lastUpdated }}</td>
+    <td>{{ policy.listId }}</td>
+    <td>{{ policy.owner }}</td>
+    <td>{{ policy.readOnly }}</td>
+    <td>{{ policy.referenceCount }}</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>{{ policy.type }}</td>
+    <td>{{ policy.version }}</td>
+  </tr>
+{%-         endfor %}
+{%-         for reference in policy['references'] %}
+  <tr>
+    <td>{{ policy.name }}</td>
+    <td>{{ policy.description }}</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>{{ policy.infoTag }}</td>
+    <td>{{ policy.isActivatedByVsmart }}</td>
+    <td>{{ policy.lastUpdated }}</td>
+    <td>{{ policy.listId }}</td>
+    <td>{{ policy.owner }}</td>
+    <td>{{ policy.readOnly }}</td>
+    <td>{{ policy.referenceCount }}</td>
+    <td>{{ reference.id }}</td>
+    <td>{{ reference.type }}</td>
+    <td>{{ policy.type }}</td>
+    <td>{{ policy.version }}</td>
+  </tr>
+{%-         endfor %}
+{%-     endfor %}
+</tbody>
+</table>
 {%- endif %}
 {%- include 'datatable_footer.j2' %}

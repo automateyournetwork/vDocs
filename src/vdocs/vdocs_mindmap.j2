@@ -105,4 +105,49 @@
 #### {{ device_model.name }}
 {%-         endfor %}
 {%-     endfor %}
+{%- elif api == "/dataservice/template/policy/vedge/devices"%}
+# vEdge Devices
+{%-     for device in data_to_template['data'] %}
+## Hostname: {{ device['host-name'] }}
+### Layout Level: {{ device.layoutLevel }}
+### Local System IP: {{ device['local-system-ip'] }}
+### Site ID: {{ device['site-id'] }}
+### UUID: {{ device.uuid }}
+{%-     endfor %}
+{%- elif api == "/dataservice/template/policy/list"%}
+# Template Policy List
+{%-     for policy in data_to_template['data'] %}
+## Name: {{ policy.name }}
+### Description: {{ policy.description }}
+### Info Tag: {{ policy.infoTag }}
+### Is Activated by VSmart: {{ policy.isActivatedByVsmart }}
+### Last Updated: {{ policy.lastUpdated }}
+### List ID: {{ policy.listId }}
+### Owner: {{ policy.owner }}
+### Read Only: {{ policy.readOnly }}
+### Reference Count: {{ policy.referenceCount }}
+### Type: {{ policy.type }}
+### Version: {{ policy.version }}
+### Policy Entries
+{%-         for entry in policy['entries'] %}
+    {%- if "jitter" in entry %}
+#### Jitter: {{ entry.jitter }}
+#### Latency: {{ entry.latency }}
+#### Loss: {{ entry.loss }}
+    {%- elif "app" in entry %}
+#### {{ entry.app }}
+    {%- elif "vpn" in entry %}
+#### VPN: {{ entry.vpn }}
+    {%- elif "siteId" in entry %}
+#### Site ID: {{ entry.siteId }}
+    {%- elif "ipPrefix" in entry %}
+#### IP Prefix: {{ entry.ipPrefix }}
+    {%- endif %}
+{%-         endfor %}
+### References
+{%-         for reference in policy['references'] %}
+#### ID: {{ reference.id }}
+#### Type: {{ reference.type }}
+{%-         endfor %}
+{%-     endfor %}
 {%- endif %}
