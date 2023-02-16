@@ -4,15 +4,29 @@ Business Ready Documents for Cisco SD-WAN vManage
 
 ## Current API Coverage
 
-Device Status
+BFD Sessions
+
+Control Connection
+
+Control Local Property
+
+Control WAN Interface
 
 Device Counters
 
+Device Status
+
 Fabric Devices
+
+Hardware Environment
+
+Template Feature Types
 
 Template Features
 
-Template Feature Types
+Template Policy List
+
+vEdge Devices
 
 ## Installation
 

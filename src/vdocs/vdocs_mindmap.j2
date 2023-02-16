@@ -150,4 +150,164 @@
 #### Type: {{ reference.type }}
 {%-         endfor %}
 {%-     endfor %}
+{%- elif api == "/dataservice/data/device/state/BFDSessions"%}
+# BFD Sessions
+{%-     for device in data_to_template['data'] %}
+## @RID: {{ device['@rid'] }}
+### Color: {{ device.color }}
+### Timestamps
+#### Created: {{ device.createTimeStamp }}
+#### Last Updated: {{ device.lastupdated }}
+#### Uptime: {{ device['uptime-date'] }}
+### Detect Multiplier: {{ device['detect-multiplier'] }}
+### Destination
+#### IP: {{ device['dst-ip'] }}
+#### Port: {{ device['dst-port'] }}
+### Local Color: {{ device['local-color'] }}
+### Protocol: {{ device.proto }}
+### Record ID: {{ device.recordId }}
+### Site ID: {{ device['site-id'] }}
+### Source
+#### IP: {{ device['src-ip'] }}
+#### Port: {{ device['src-port'] }}
+### State: {{ device.state }}
+### System IP: {{ device['system-ip'] }}
+### Transitions: {{ device.transitions }}
+### TX Interval: {{ device['tx-interval'] }}
+### vDevice
+#### Hostname: {{ device['vdevice-host-name'] }}
+#### Name: {{ device['vdevice-name'] }}
+#### Data Key {{ device['vdevice-dataKey'] }}
+### vManage System IP: {{ device['vmanage-system-ip'] }}
+{%-     endfor %}
+{%- elif api == "/dataservice/data/device/state/ControlConnection"%}
+# Control Connections
+{%-     for device in data_to_template['data'] %}
+## @RID: {{ device['@rid'] }}
+### Behind Proxy: {{ device['behind-proxy'] }}
+### Controller Group ID: {{ device['controller-group-id'] }}
+### Timestamps
+#### Created: {{ device.createTimeStamp }}
+#### Last Updated: ### {{ device.lastupdated }}
+#### Uptime: {{ device['uptime-date'] }}
+### Domain ID: {{ device['domain-id'] }}
+### Instance: {{ device.instance }}
+### Color
+#### Local: {{ device['local-color'] }}
+#### Remote: {{ device['remote-color'] }}
+### Peer Type: {{ device['peer-type'] }}
+### IP
+#### Private
+##### IP: {{ device['private-ip'] }}
+##### Port: {{ device['private-port'] }}
+#### Public
+##### IP: {{ device['public-ip'] }}
+##### Port: {{ device['public-port'] }}
+#### Protocol: {{ device.protocol }}
+### Record ID: {{ device.recordId }}
+### Site ID: {{ device['site-id'] }}
+### State: {{ device.state }}
+### System IP: {{ device['system-ip'] }}
+### vDevice
+#### Hostname: {{ device['vdevice-host-name'] }}
+#### Device Name: {{ device['vdevice-name'] }}
+#### Data Key: {{ device['vdevice-dataKey'] }}
+### vManage System IP: {{ device['vmanage-system-ip'] }}
+{%-     endfor %}
+{%- elif api == "/dataservice/data/device/state/ControlLocalProperty"%}
+# Control Local Property
+{%-     for device in data_to_template['data'] %}
+## @RID: {{ device['@rid'] }}
+### Board Serial: {{ device['board-serial'] }}
+### Certificate
+#### Not Valid
+##### After: {{ device['certificate-not-valid-after'] }}
+##### Before: {{ device['certificate-not-valid-before'] }}
+#### Status: {{ device['certificate-status'] }}
+#### Validity: {{ device['certificate-validity'] }}
+### Timestamps
+#### Created: {{ device.createTimeStamp }}
+#### Last Updated: {{ device.lastupdated }}
+### Device Type: {{ device['device-type'] }}
+### DNS Name: {{ device['dns-name'] }}
+### Domain ID: {{ device['domain-id'] }}
+### Keygen Interval: {{ device['keygen-interval'] }}
+### Max Controllers: {{ device['max-controllers'] }}
+### Number Active WAN Interfaces: {{ device['number-active-wan-interfaces'] }}
+### Number vBond Peers: {{ device['number-vbond-peers'] }}
+### Organization Name: {{ device['organization-name'] }}
+### Port Hopped: {{ device['port-hopped'] }}
+### Protocol: {{ device.protocol }}
+### Record ID: {{ device.recordId }}
+### Register Interval: {{ device['register-interval'] }}
+### Retry Interval: {{ device['retry-interval'] }}
+### Root CA Chain Status: {{ device['root-ca-chain-status'] }}
+### Site ID: {{ device['site-id'] }}
+### SP Organization Name: {{ device['sp-organization-name'] }}
+### System IP: {{ device['system-ip'] }}
+### TLS Port: {{ device['tls-port'] }}
+### Token: {{ device.token }}
+### UUID: {{ device.uuid }}
+### vDevice
+#### Hostname: {{ device['vdevice-host-name'] }}
+#### Name: {{ device['vdevice-name'] }}
+#### Data Key: {{ device['vdevice-dataKey'] }}
+### vEdge List Version: {{ device['vedge-list-version'] }}
+### vManage System IP: {{ device['vmanage-system-ip'] }}
+### vSmart List Version: {{ device['vsmart-list-version'] }}
+{%-     endfor %}
+{%- elif api == "/dataservice/data/device/state/ControlWanInterface"%}
+# Control WAN Interface
+{%-     for device in data_to_template['data'] %}
+## @RID: {{ device['@rid'] }}
+### State:
+#### Admin: {{ device['admin-state'] }}
+#### Operation: {{ device['operation-state'] }}
+### Carrier: {{ device.carrier }}
+### Color: {{ device.color }}
+### Timestamps
+#### Created: {{ device.createTimeStamp }}
+#### Last Updated: {{ device.lastupdated }}
+### Index: {{ device.index }}
+### Instance: {{ device.instance }}
+### Interface: {{ device.interface }}
+### Number of
+#### vManages: {{ device['num-vmanages'] }}
+#### vSmarts: {{ device['num-vsmarts'] }}
+### IP Addresses
+#### Private
+##### v4: {{ device['private-ip'] }}
+##### v6: {{ device['private-ipv6'] }}
+##### Port: {{ device['private-port'] }}
+#### Public
+##### v4: {{ device['public-ip'] }}
+##### Port: {{ device['public-port'] }}
+### Record ID: {{ device.recordId }}
+### vDevice
+#### Hostname: {{ device['vdevice-host-name'] }}
+#### Name: {{ device['vdevice-name']}}
+#### Data Key: {{ device['vdevice-dataKey'] }}
+### vManage System IP: {{ device['vmanage-system-ip'] }}
+### WAN Port Hopped: {{ device['wan-port-hopped'] }}
+{%-     endfor %}
+{%- elif api == "/dataservice/data/device/state/HardwareEnvironment"%}
+# Hardware Environment
+{%-     for device in data_to_template['data'] %}
+## @RID: {{ device['@rid'] }}
+### Timestamps
+#### Created: {{ device.createTimeStamp }}
+#### Last Updated: {{ device.lastupdated }}
+### Hardware
+#### Class: {{ device['hw-class'] }}
+#### Dev Index: {{ device['hw-dev-index'] }}
+#### Item: {{ device['hw-item'] }}
+### Measurement: {{ device.measurement }}
+### Record ID: {{ device.recordId }}
+### Status: {{ device.status }}
+### vDevice
+#### Hostname: {{ device['vdevice-host-name'] }}
+#### Name: {{ device['vdevice-name'] }}
+#### Data Key: {{ device['vdevice-dataKey'] }}
+### vManage System IP: {{ device['vmanage-system-ip'] }}
+{%-     endfor %}
 {%- endif %}

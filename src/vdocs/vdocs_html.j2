@@ -359,5 +359,307 @@
 {%-     endfor %}
 </tbody>
 </table>
+{%- elif api == "/dataservice/data/device/state/BFDSessions"%}
+<h1>BFD Sessions</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>@RID</th>
+    <th>Color</th>
+    <th>Create Timestamp</th>
+    <th>Detect Multiplier</th>
+    <th>Destination IP</th>
+    <th>Destination Port</th>
+    <th>Last Updated</th>
+    <th>Local Color</th>
+    <th>Protocol</th>
+    <th>Record ID</th>
+    <th>Site ID</th>
+    <th>Source IP</th>
+    <th>Source Port</th>
+    <th>State</th>
+    <th>System IP</th>
+    <th>Transitions</th>
+    <th>TX Interval</th>
+    <th>Uptime Date</th>
+    <th>vDevice Data Key</th>
+    <th>vDevice Hostname</th>
+    <th>vDevice Name</th>
+    <th>vManage System IP</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for device in data_to_template['data'] %}
+  <tr>
+    <td>{{ device['@rid'] }}</td>
+    <td>{{ device.color }}</td>
+    <td>{{ device.createTimeStamp }}</td>
+    <td>{{ device['detect-multiplier'] }}</td>
+    <td>{{ device['dst-ip'] }}</td>
+    <td>{{ device['dst-port'] }}</td>
+    <td>{{ device.lastupdated }}</td>
+    <td>{{ device['local-color'] }}</td>
+    <td>{{ device.proto }}</td>
+    <td>{{ device.recordId }}</td>
+    <td>{{ device['site-id'] }}</td>
+    <td>{{ device['src-ip'] }}</td>
+    <td>{{ device['src-port'] }}</td>
+    <td>{{ device.state }}</td>
+    <td>{{ device['system-ip'] }}</td>
+    <td>{{ device.transitions }}</td>
+    <td>{{ device['tx-interval'] }}</td>
+    <td>{{ device['uptime-date'] }}</td>
+    <td>{{ device['vdevice-dataKey'] }}</td>
+    <td>{{ device['vdevice-host-name'] }}</td>
+    <td>{{ device['vdevice-name'] }}</td>
+    <td>{{ device['vmanage-system-ip'] }}</td>
+  </tr>
+{%-     endfor %}
+</tbody>
+</table>
+{%- elif api == "/dataservice/data/device/state/ControlConnection"%}
+<h1>Control Connections</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>@RID</th>
+    <th>Behind Proxy</th>
+    <th>Controller Group ID</th>
+    <th>Create Timestamp</th>
+    <th>Domain ID</th>
+    <th>Instance</th>
+    <th>Last Updated</th>
+    <th>Local Color</th>
+    <th>Peer Type</th>
+    <th>Private IP</th>
+    <th>Private Port</th>
+    <th>Protocol</th>
+    <th>Public IP</th>
+    <th>Public Port</th>
+    <th>Record ID</th>
+    <th>Remote Color</th>
+    <th>Site ID</th>
+    <th>State</th>
+    <th>System IP</th>
+    <th>Uptime Date</th>
+    <th>vDevice Data Key</th>
+    <th>vDevice Hostname</th>
+    <th>vDevice Name</th>
+    <th>vManage System IP</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for device in data_to_template['data'] %}
+  <tr>
+    <td>{{ device['@rid'] }}</td>
+    <td>{{ device['behind-proxy'] }}</td>
+    <td>{{ device['controller-group-id'] }}</td>
+    <td>{{ device.createTimeStamp }}</td>
+    <td>{{ device['domain-id'] }}</td>
+    <td>{{ device.instance }}</td>
+    <td>{{ device.lastupdated }}</td>
+    <td>{{ device['local-color'] }}</td>
+    <td>{{ device['peer-type'] }}</td>
+    <td>{{ device['private-ip'] }}</td>
+    <td>{{ device['private-port'] }}</td>
+    <td>{{ device.protocol }}</td>
+    <td>{{ device['public-ip'] }}</td>
+    <td>{{ device['public-port'] }}</td>
+    <td>{{ device.recordId }}</td>
+    <td>{{ device['remote-color'] }}</td>
+    <td>{{ device['site-id'] }}</td>
+    <td>{{ device.state }}</td>
+    <td>{{ device['system-ip'] }}</td>
+    <td>{{ device['uptime-date'] }}</td>
+    <td>{{ device['vdevice-dataKey'] }}</td>
+    <td>{{ device['vdevice-host-name'] }}</td>
+    <td>{{ device['vdevice-name'] }}</td>
+    <td>{{ device['vmanage-system-ip'] }}</td>
+  </tr>
+{%-     endfor %}
+</tbody>
+</table>
+{%- elif api == "/dataservice/data/device/state/ControlLocalProperty"%}
+<h1>Control Local Property</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>@RID</th>
+    <th>Board Serial</th>
+    <th>Certificate Not Valid After</th>
+    <th>Certificate Not Valid Before</th>
+    <th>Certificate Status</th>
+    <th>Certificate Validity</th>
+    <th>Create Timestamp</th>
+    <th>Device Type</th>
+    <th>DNS Name</th>
+    <th>Domain ID</th>
+    <th>Keygen Interval</th>
+    <th>Last Updated</th>
+    <th>Max Controllers</th>
+    <th>Number Active WAN Interfaces</th>
+    <th>Number vBond Peers</th>
+    <th>Organization Name</th>
+    <th>Port Hopped</th>
+    <th>Protocol</th>
+    <th>Record ID</th>
+    <th>Register Interval</th>
+    <th>Retry Interval</th>
+    <th>Root CA Chain Status</th>
+    <th>Site ID</th>
+    <th>SP Organization Name</th>
+    <th>System IP</th>
+    <th>TLS Port</th>
+    <th>Token</th>
+    <th>UUID</th>
+    <th>vDevice Data Key</th>
+    <th>vDevice Hostname</th>
+    <th>vDevice Name</th>
+    <th>vEdge List Version</th>
+    <th>vManage System IP</th>
+    <th>vSmart List Version</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for device in data_to_template['data'] %}
+  <tr>
+    <td>{{ device['@rid'] }}</td>
+    <td>{{ device['board-serial'] }}</td>
+    <td>{{ device['certificate-not-valid-after'] }}</td>
+    <td>{{ device['certificate-not-valid-before'] }}</td>
+    <td>{{ device['certificate-status'] }}</td>
+    <td>{{ device['certificate-validity'] }}</td>
+    <td>{{ device.createTimeStamp }}</td>
+    <td>{{ device['device-type'] }}</td>
+    <td>{{ device['dns-name'] }}</td>
+    <td>{{ device['domain-id'] }}</td>
+    <td>{{ device['keygen-interval'] }}</td>
+    <td>{{ device.lastupdated }}</td>
+    <td>{{ device['max-controllers'] }}</td>
+    <td>{{ device['number-active-wan-interfaces'] }}</td>
+    <td>{{ device['number-vbond-peers'] }}</td>
+    <td>{{ device['organization-name'] }}</td>
+    <td>{{ device['port-hopped'] }}</td>
+    <td>{{ device.protocol }}</td>
+    <td>{{ device.recordId }}</td>
+    <td>{{ device['register-interval'] }}</td>
+    <td>{{ device['retry-interval'] }}</td>
+    <td>{{ device['root-ca-chain-status'] }}</td>
+    <td>{{ device['site-id'] }}</td>
+    <td>{{ device['sp-organization-name'] }}</td>
+    <td>{{ device['system-ip'] }}</td>
+    <td>{{ device['tls-port'] }}</td>
+    <td>{{ device.token }}</td>
+    <td>{{ device.uuid }}</td>
+    <td>{{ device['vdevice-dataKey'] }}</td>
+    <td>{{ device['vdevice-host-name'] }}</td>
+    <td>{{ device['vdevice-name'] }}</td>
+    <td>{{ device['vedge-list-version'] }}</td>
+    <td>{{ device['vmanage-system-ip'] }}</td>
+    <td>{{ device['vsmart-list-version'] }}</td>
+  </tr>
+{%-     endfor %}
+</tbody>
+</table>
+{%- elif api == "/dataservice/data/device/state/ControlWanInterface"%}
+<h1>Control WAN Interface</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>@RID</th>
+    <th>Admin State</th>
+    <th>Carrier</th>
+    <th>Color</th>
+    <th>Create Timestamp</th>
+    <th>Index</th>
+    <th>Instance</th>
+    <th>Interface</th>
+    <th>Last Updated</th>
+    <th>Number vManages</th>
+    <th>Number vSmarts</th>
+    <th>Operation State</th>
+    <th>Private IP</th>
+    <th>Private IPv6</th>
+    <th>Private Port</th>
+    <th>Public IP</th>
+    <th>Public Port</th>
+    <th>Record ID</th>
+    <th>vDevice Data Key</th>
+    <th>vDevice Hostname</th>
+    <th>vDevice Name</th>
+    <th>vManage System IP</th>
+    <th>WAN Port Hopped</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for device in data_to_template['data'] %}
+  <tr>
+    <td>{{ device['@rid'] }}</td>
+    <td>{{ device['admin-state'] }}</td>
+    <td>{{ device.carrier }}</td>
+    <td>{{ device.color }}</td>
+    <td>{{ device.createTimeStamp }}</td>
+    <td>{{ device.index }}</td>
+    <td>{{ device.instance }}</td>
+    <td>{{ device.interface }}</td>
+    <td>{{ device.lastupdated }}</td>
+    <td>{{ device['num-vmanages'] }}</td>
+    <td>{{ device['num-vsmarts'] }}</td>
+    <td>{{ device['operation-state'] }}</td>
+    <td>{{ device['private-ip'] }}</td>
+    <td>{{ device['private-ipv6'] }}</td>
+    <td>{{ device['private-port'] }}</td>
+    <td>{{ device['public-ip'] }}</td>
+    <td>{{ device['public-port'] }}</td>
+    <td>{{ device.recordId }}</td>
+    <td>{{ device['vdevice-dataKey'] }}</td>
+    <td>{{ device['vdevice-host-name'] }}</td>
+    <td>{{ device['vdevice-name']}}</td>
+    <td>{{ device['vmanage-system-ip'] }}</td>
+    <td>{{ device['wan-port-hopped'] }}</td>
+  </tr>
+{%-     endfor %}
+</tbody>
+</table>
+{%- elif api == "/dataservice/data/device/state/HardwareEnvironment"%}
+<h1>Hardware Environment</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>@RID</th>
+    <th>Create Timestamp</th>
+    <th>Hardware Class</th>
+    <th>Hardware Dev Index</th>
+    <th>Hardware Item</th>
+    <th>Last Updated</th>
+    <th>Measurement</th>
+    <th>Record ID</th>
+    <th>Status</th>
+    <th>vDevice Data Key</th>
+    <th>vDevice Hostname</th>
+    <th>vDevice Name</th>
+    <th>vManage System IP</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for device in data_to_template['data'] %}
+  <tr>
+    <td>{{ device['@rid'] }}</td>
+    <td>{{ device.createTimeStamp }}</td>
+    <td>{{ device['hw-class'] }}</td>
+    <td>{{ device['hw-dev-index'] }}</td>
+    <td>{{ device['hw-item'] }}</td>
+    <td>{{ device.lastupdated }}</td>
+    <td>{{ device.measurement }}</td>
+    <td>{{ device.recordId }}</td>
+    <td>{{ device.status }}</td>
+    <td>{{ device['vdevice-dataKey'] }}</td>
+    <td>{{ device['vdevice-host-name'] }}</td>
+    <td>{{ device['vdevice-name'] }}</td>
+    <td>{{ device['vmanage-system-ip'] }}</td>
+  </tr>
+{%-     endfor %}
+</tbody>
+</table>
 {%- endif %}
 {%- include 'datatable_footer.j2' %}

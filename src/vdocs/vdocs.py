@@ -27,9 +27,14 @@ class vDocs():
         asyncio.run(self.main())
 
     def make_directories(self):
-        api_list = ['Fabric Devices',
+        api_list = ['BFD Sessions',
+                    'Control Connection',
+                    'Control Local Property',
+                    'Control WAN Interfaces',
                     'Device Status',
                     'Device Counters',
+                    'Fabric Devices',
+                    'Hardware Environment',
                     'Template Features',
                     'Template Feature Types',
                     'Template Policy List',
@@ -61,7 +66,12 @@ class vDocs():
         print(f"<Authentication Status code {response.status_code} for { url }>")
         return response.cookies
 
-    api_list = ["/dataservice/device",
+    api_list = ["/dataservice/data/device/state/BFDSessions",
+                "/dataservice/data/device/state/ControlConnection",
+                "/dataservice/data/device/state/ControlLocalProperty",
+                "/dataservice/data/device/state/ControlWanInterface",
+                '/dataservice/data/device/state/HardwareEnvironment',
+                "/dataservice/device",
                 "/dataservice/device/monitor",
                 "/dataservice/device/counters",
                 "/dataservice/template/feature",
@@ -111,6 +121,26 @@ class vDocs():
                 async with aiofiles.open('Template Policy List/JSON/Template Policy List.json', mode='w') as f:
                     await f.write(json.dumps(payload, indent=4, sort_keys=True))
 
+            if api == "/dataservice/data/device/state/BFDSessions":
+                async with aiofiles.open('BFD Sessions/JSON/BFD Sessions.json', mode='w') as f:
+                    await f.write(json.dumps(payload, indent=4, sort_keys=True))
+
+            if api == "/dataservice/data/device/state/ControlConnection":
+                async with aiofiles.open('Control Connection/JSON/Control Connection.json', mode='w') as f:
+                    await f.write(json.dumps(payload, indent=4, sort_keys=True))
+
+            if api == "/dataservice/data/device/state/ControlLocalProperty":
+                async with aiofiles.open('Control Local Property/JSON/Control Local Property.json', mode='w') as f:
+                    await f.write(json.dumps(payload, indent=4, sort_keys=True))
+
+            if api == "/dataservice/data/device/state/ControlWanInterface":
+                async with aiofiles.open('Control WAN Interfaces/JSON/Control WAN Interfaces.json', mode='w') as f:
+                    await f.write(json.dumps(payload, indent=4, sort_keys=True))
+
+            if api == "/dataservice/data/device/state/HardwareEnvironment":
+                async with aiofiles.open('Hardware Environment/JSON/Hardware Environment.json', mode='w') as f:
+                    await f.write(json.dumps(payload, indent=4, sort_keys=True))
+
     async def yaml_file(self, parsed_json):
         for api, payload in json.loads(parsed_json):
             clean_yaml = yaml.dump(payload, default_flow_style=False)
@@ -140,6 +170,26 @@ class vDocs():
 
             if api == "/dataservice/template/policy/list":
                 async with aiofiles.open('Template Policy List/YAML/Template Policy List.yaml', mode='w' ) as f:
+                    await f.write(clean_yaml)
+
+            if api == "/dataservice/data/device/state/BFDSessions":
+                async with aiofiles.open('BFD Sessions/YAML/BFD Sessions.yaml', mode='w' ) as f:
+                    await f.write(clean_yaml)
+
+            if api == "/dataservice/data/device/state/ControlConnection":
+                async with aiofiles.open('Control Connection/YAML/Control Connection.yaml', mode='w' ) as f:
+                    await f.write(clean_yaml)
+
+            if api == "/dataservice/data/device/state/ControlLocalProperty":
+                async with aiofiles.open('Control Local Property/YAML/Control Local Property.yaml', mode='w' ) as f:
+                    await f.write(clean_yaml)
+
+            if api == "/dataservice/data/device/state/ControlWanInterface":
+                async with aiofiles.open('Control WAN Interfaces/YAML/Control WAN Interfaces.yaml', mode='w' ) as f:
+                    await f.write(clean_yaml)
+
+            if api == "/dataservice/data/device/state/HardwareEnvironment":
+                async with aiofiles.open('Hardware Environment/YAML/Hardware Environment.yaml', mode='w' ) as f:
                     await f.write(clean_yaml)
 
     async def csv_file(self, parsed_json):
@@ -177,6 +227,26 @@ class vDocs():
                 async with aiofiles.open('Template Policy List/CSV/Template Policy List.csv', mode='w' ) as f:
                     await f.write(csv_output)
 
+            if api == "/dataservice/data/device/state/BFDSessions":
+                async with aiofiles.open('BFD Sessions/CSV/BFD Sessions.csv', mode='w' ) as f:
+                    await f.write(csv_output)
+
+            if api == "/dataservice/data/device/state/ControlConnection":
+                async with aiofiles.open('Control Connection/CSV/Control Connection.csv', mode='w' ) as f:
+                    await f.write(csv_output)
+
+            if api == "/dataservice/data/device/state/ControlLocalProperty":
+                async with aiofiles.open('Control Local Property/CSV/Control Local Property.csv', mode='w' ) as f:
+                    await f.write(csv_output)
+
+            if api == "/dataservice/data/device/state/ControlWanInterface":
+                async with aiofiles.open('Control WAN Interfaces/CSV/Control WAN Interfaces.csv', mode='w' ) as f:
+                    await f.write(csv_output)
+
+            if api == "/dataservice/data/device/state/HardwareEnvironment":
+                async with aiofiles.open('Hardware Environment/CSV/Hardware Environment.csv', mode='w' ) as f:
+                    await f.write(csv_output)
+
     async def markdown_file(self, parsed_json):
         template_dir = Path(__file__).resolve().parent
         env = Environment(loader=FileSystemLoader(str(template_dir)), enable_async=True)
@@ -210,6 +280,26 @@ class vDocs():
 
             if api == "/dataservice/template/policy/list":
                 async with aiofiles.open('Template Policy List/Markdown/Template Policy List.md', mode='w' ) as f:
+                    await f.write(markdown_output)
+
+            if api == "/dataservice/data/device/state/BFDSessions":
+                async with aiofiles.open('BFD Sessions/Markdown/BFD Sessions.md', mode='w' ) as f:
+                    await f.write(markdown_output)
+
+            if api == "/dataservice/data/device/state/ControlConnection":
+                async with aiofiles.open('Control Connection/Markdown/Control Connection.md', mode='w' ) as f:
+                    await f.write(markdown_output)
+
+            if api == "/dataservice/data/device/state/ControlLocalProperty":
+                async with aiofiles.open('Control Local Property/Markdown/Control Local Property.md', mode='w' ) as f:
+                    await f.write(markdown_output)
+
+            if api == "/dataservice/data/device/state/ControlWanInterface":
+                async with aiofiles.open('Control WAN Interfaces/Markdown/Control WAN Interfaces.md', mode='w' ) as f:
+                    await f.write(markdown_output)
+
+            if api == "/dataservice/data/device/state/HardwareEnvironment":
+                async with aiofiles.open('Hardware Environment/Markdown/Hardware Environment.md', mode='w' ) as f:
                     await f.write(markdown_output)
 
     async def html_file(self, parsed_json):
@@ -247,6 +337,26 @@ class vDocs():
                 async with aiofiles.open('Template Policy List/HTML/Template Policy List.html', mode='w' ) as f:
                     await f.write(html_output)
 
+            if api == "/dataservice/data/device/state/BFDSessions":
+                async with aiofiles.open('BFD Sessions/HTML/BFD Sessions.html', mode='w' ) as f:
+                    await f.write(html_output)
+
+            if api == "/dataservice/data/device/state/ControlConnection":
+                async with aiofiles.open('Control Connection/HTML/Control Connection.html', mode='w' ) as f:
+                    await f.write(html_output)
+
+            if api == "/dataservice/data/device/state/ControlLocalProperty":
+                async with aiofiles.open('Control Local Property/HTML/Control Local Property.html', mode='w' ) as f:
+                    await f.write(html_output)
+
+            if api == "/dataservice/data/device/state/ControlWanInterface":
+                async with aiofiles.open('Control WAN Interfaces/HTML/Control WAN Interfaces.html', mode='w' ) as f:
+                    await f.write(html_output)
+
+            if api == "/dataservice/data/device/state/HardwareEnvironment":
+                async with aiofiles.open('Hardware Environment/HTML/Hardware Environment.html', mode='w' ) as f:
+                    await f.write(html_output)
+
     async def mindmap_file(self, parsed_json):
         template_dir = Path(__file__).resolve().parent
         env = Environment(loader=FileSystemLoader(str(template_dir)), enable_async=True)
@@ -280,6 +390,26 @@ class vDocs():
 
             if api == "/dataservice/template/policy/list":
                 async with aiofiles.open('Template Policy List/Mindmap/Template Policy List.md', mode='w' ) as f:
+                    await f.write(mindmap_output)
+
+            if api == "/dataservice/data/device/state/BFDSessions":
+                async with aiofiles.open('BFD Sessions/Mindmap/BFD Sessions.md', mode='w' ) as f:
+                    await f.write(mindmap_output)
+
+            if api == "/dataservice/data/device/state/ControlConnection":
+                async with aiofiles.open('Control Connection/Mindmap/Control Connection.md', mode='w' ) as f:
+                    await f.write(mindmap_output)
+
+            if api == "/dataservice/data/device/state/ControlLocalProperty":
+                async with aiofiles.open('Control Local Property/Mindmap/Control Local Property.md', mode='w' ) as f:
+                    await f.write(mindmap_output)
+
+            if api == "/dataservice/data/device/state/ControlWanInterface":
+                async with aiofiles.open('Control WAN Interfaces/Mindmap/Control WAN Interfaces.md', mode='w' ) as f:
+                    await f.write(mindmap_output)
+
+            if api == "/dataservice/data/device/state/HardwareEnvironment":
+                async with aiofiles.open('Hardware Environment/Mindmap/Hardware Environment.md', mode='w' ) as f:
                     await f.write(mindmap_output)
 
     async def all_files(self, parsed_json):
