@@ -331,4 +331,33 @@
 ### Version: {{ device.version }}
 ### vManage System IP: {{ device['vmanage-system-ip'] }}
 {%-     endfor %}
+{%- elif api == "/dataservice/data/device/state/Interface"%}
+# Interface<
+{%-     for device in data_to_template['data'] %}
+## @RID: {{ device['@rid'] }}
+### AF Type: {{ device['af-type'] }}
+### Auto Negotiate: {{ device['auto-neg'] }}
+### Timestamps
+#### Created: {{ device.createTimeStamp }}
+#### Last Updated: {{ device.lastupdated }}
+### Duplex: {{ device.duplex }}
+### Encapsulation Type: {{ device['encap-type'] }}
+### Hardware Address: {{ device.hwaddr }}
+### Admin Status: {{ device['if-admin-status'] }}
+### Oper Status: {{ device['if-oper-status'] }}
+### Index: {{ device.ifindex }}
+### Name: {{ device.ifname }}
+### IP Address
+#### v4: {{ device['ip-address'] }}
+#### v6: {{ device['ipv6-address'] }}
+### Port Type: {{ device['port-type'] }}
+### Record ID: {{ device.recordId }}
+### Speed Mbps: {{ device['speed-mbps'] }}
+### vDevice
+#### Hostname: {{ device['vdevice-host-name'] }}
+#### Device Name: {{ device['vdevice-name'] }}
+#### Data Key: {{ device['vdevice-dataKey'] }}
+### vManage System IP: {{ device['vmanage-system-ip'] }}
+### VPN ID: {{ device['vpn-id'] }}
+{%-     endfor %}
 {%- endif %}

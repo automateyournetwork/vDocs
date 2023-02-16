@@ -703,5 +703,63 @@
 {%-     endfor %}
 </tbody>
 </table>
+{%- elif api == "/dataservice/data/device/state/Interface"%}
+<h1>Interface</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>@RID</th>
+    <th>AF Type</th>
+    <th>Auto Negotiate</th>
+    <th>Create Timestamp</th>
+    <th>Duplex</th>
+    <th>Encapsulation Type</th>
+    <th>Hardware Address</th>
+    <th>Interface Admin Status</th>
+    <th>Interface Oper Status</th>
+    <th>Interface Index</th>
+    <th>Interface Name</th>
+    <th>IP Address</th>
+    <th>IPv6 Address</th>
+    <th>Last Updated</th>
+    <th>Port Type</th>
+    <th>Record ID</th>
+    <th>Speed Mbps</th>
+    <th>vDevice Data Key</th>
+    <th>vDevice Hostname</th>
+    <th>vDevice Name</th>
+    <th>vManage System IP</th>
+    <th>VPN ID</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for device in data_to_template['data'] %}
+  <tr>
+    <td>{{ device['@rid'] }}</td>
+    <td>{{ device['af-type'] }}</td>
+    <td>{{ device['auto-neg'] }}</td>
+    <td>{{ device.createTimeStamp }}</td>
+    <td>{{ device.duplex }}</td>
+    <td>{{ device['encap-type'] }}</td>
+    <td>{{ device.hwaddr }}</td>
+    <td>{{ device['if-admin-status'] }}</td>
+    <td>{{ device['if-oper-status'] }}</td>
+    <td>{{ device.ifindex }}</td>
+    <td>{{ device.ifname }}</td>
+    <td>{{ device['ip-address'] }}</td>
+    <td>{{ device['ipv6-address'] }}</td>
+    <td>{{ device.lastupdated }}</td>
+    <td>{{ device['port-type'] }}</td>
+    <td>{{ device.recordId }}</td>
+    <td>{{ device['speed-mbps'] }}</td>
+    <td>{{ device['vdevice-dataKey'] }}</td>
+    <td>{{ device['vdevice-host-name'] }}</td>
+    <td>{{ device['vdevice-name'] }}</td>
+    <td>{{ device['vmanage-system-ip'] }}</td>
+    <td>{{ device['vpn-id'] }}</td>
+  </tr>
+{%-     endfor %}
+</tbody>
+</table>
 {%- endif %}
 {%- include 'datatable_footer.j2' %}

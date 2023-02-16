@@ -59,4 +59,8 @@
 {%-     for device in data_to_template['data'] %}
 {{ device['@rid'] }},{{ device.createTimeStamp }},{{ device['hw-description'] }},{{ device['hw-dev-index'] }},{{ device['hw-type'] }},{{ device.lastupdated }},{{ device['part-number'] }},{{ device.recordId }},{{ device['serial-number'] }},{{ device['vdevice-dataKey'] }},{{ device['vdevice-host-name'] }},{{ device['vdevice-name'] }},{{ device.version }},{{ device['vmanage-system-ip'] }}
 {%-     endfor %}
+{%- elif api == "/dataservice/data/device/state/Interface"%}@RID,AF Type,Auto Negotiate,Create Timestamp,Duplex,Encapsulation Type,Hardware Address,Interface Admin Status,Interface Oper Status,Interface Index,Interface Name,IP Address,IPv6 Address,Last Updated,Port Type,Record ID,Speed Mbps,vDevice Data Key,vDevice Hostname,vDevice Name,vManage System IP,VPN ID
+{%-     for device in data_to_template['data'] %}
+{{ device['@rid'] }},{{ device['af-type'] }},{{ device['auto-neg'] }},{{ device.createTimeStamp }},{{ device.duplex }},{{ device['encap-type'] }},{{ device.hwaddr }},{{ device['if-admin-status'] }},{{ device['if-oper-status'] }},{{ device.ifindex }},{{ device.ifname }},{{ device['ip-address'] }},{{ device['ipv6-address'] }},{{ device.lastupdated }},{{ device['port-type'] }},{{ device.recordId }},{{ device['speed-mbps'] }},{{ device['vdevice-dataKey'] }},{{ device['vdevice-host-name'] }},{{ device['vdevice-name'] }},{{ device['vmanage-system-ip'] }},{{ device['vpn-id'] }}
+{%-     endfor %}
 {%- endif %}
