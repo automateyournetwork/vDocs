@@ -109,4 +109,10 @@
 {%-     for device in data_to_template['data'] %}
 | {{ device['@rid'] }} | {{ device['board_type'] }} | {{ device.bootloader_version }} | {{ device.build_number | replace("\n","") }} | {{ device['chassis-serial-number'] }} | {{ device.createTimeStamp }} | {{ device.disk_status }} | {{ device.fips_mode }} | {{ device.lastupdated }} | {{ device.loghost_status }} | {{ device.model_sku }} | {{ device.personality }} | {{ device.reboot_reason }} | {{ device.reboot_type }} | {{ device.recordId }} | {{ device.state }} | {{ device.state_description }} | {{ device.testbed_mode }} | {{ device.total_cpu_count }} | {{ device['uptime-date'] }} | {{ device['vdevice-dataKey'] }} | {{ device['vdevice-host-name'] }} | {{ device['vdevice-name'] }} | {{ device.version }} | {{ device['vmanage-storage-disk-mount'] }} | {{ device['vmanage-system-ip'] }} |
 {%-     endfor %}
+{%- elif api == "/dataservice/data/device/state/System"%}# System
+| @RID | Create Timestamp | Last Updated | Record ID | UUID | vDevice Data Key | vDevice Hostname | vDevice Name | vManage System IP |
+| ---- | ---------------- | ------------ | --------- | ---- | ---------------- | ---------------- | ------------ | ----------------- |
+{%-     for device in data_to_template['data'] %}
+| {{ device['@rid'] }} | {{ device.createTimeStamp }} | {{ device.lastupdated }} | {{ device.recordId }} | {{ device.uuid }} | {{ device['vdevice-dataKey'] }} | {{ device['vdevice-host-name'] }} | {{ device['vdevice-name'] }} | {{ device['vmanage-system-ip'] }} |
+{%-     endfor %}
 {%- endif %}

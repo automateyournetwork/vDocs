@@ -947,5 +947,37 @@
 {%-     endfor %}
 </tbody>
 </table>
+{%- elif api == "/dataservice/data/device/state/System"%}
+<h1>System</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>@RID</th>
+    <th>Create Timestamp</th>
+    <th>Last Updated</th>
+    <th>Record ID</th>
+    <th>UUID</th>
+    <th>vDevice Data Key</th>
+    <th>vDevice Hostname</th>
+    <th>vDevice Name</th>
+    <th>vManage System IP</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for device in data_to_template['data'] %}
+  <tr>
+    <td>{{ device['@rid'] }}</td>
+    <td>{{ device.createTimeStamp }}</td>
+    <td>{{ device.lastupdated }}</td>
+    <td>{{ device.recordId }}</td>
+    <td>{{ device.uuid }}</td>
+    <td>{{ device['vdevice-dataKey'] }}</td>
+    <td>{{ device['vdevice-host-name'] }}</td>
+    <td>{{ device['vdevice-name'] }}</td>
+    <td>{{ device['vmanage-system-ip'] }}</td>
+  </tr>
+{%-     endfor %}
+</tbody>
+</table>
 {%- endif %}
 {%- include 'datatable_footer.j2' %}

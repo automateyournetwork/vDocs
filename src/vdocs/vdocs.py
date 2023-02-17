@@ -39,6 +39,7 @@ class vDocs():
                     'Hardware Inventory',
                     'Interfaces',
                     'OMP Peers',
+                    'System',
                     'System Status',
                     'Template Features',
                     'Template Feature Types',
@@ -80,6 +81,7 @@ class vDocs():
                 "/dataservice/data/device/state/HardwareInventory",
                 "/dataservice/data/device/state/Interface",
                 "/dataservice/data/device/state/OMPPeer",
+                '/dataservice/data/device/state/System',
                 '/dataservice/data/device/state/SystemStatus',
                 "/dataservice/device",
                 "/dataservice/device/monitor",
@@ -171,6 +173,10 @@ class vDocs():
                 async with aiofiles.open('System Status/JSON/System Status.json', mode='w') as f:
                     await f.write(json.dumps(payload, indent=4, sort_keys=True))
 
+            if api == "/dataservice/data/device/state/System":
+                async with aiofiles.open('System/JSON/System.json', mode='w') as f:
+                    await f.write(json.dumps(payload, indent=4, sort_keys=True))
+
     async def yaml_file(self, parsed_json):
         for api, payload in json.loads(parsed_json):
             clean_yaml = yaml.dump(payload, default_flow_style=False)
@@ -240,6 +246,10 @@ class vDocs():
 
             if api == "/dataservice/data/device/state/SystemStatus":
                 async with aiofiles.open('System Status/YAML/System Status.yaml', mode='w' ) as f:
+                    await f.write(clean_yaml)
+
+            if api == "/dataservice/data/device/state/System":
+                async with aiofiles.open('System/YAML/System.yaml', mode='w' ) as f:
                     await f.write(clean_yaml)
 
     async def csv_file(self, parsed_json):
@@ -317,6 +327,10 @@ class vDocs():
                 async with aiofiles.open('System Status/CSV/System Status.csv', mode='w' ) as f:
                     await f.write(csv_output)
 
+            if api == "/dataservice/data/device/state/System":
+                async with aiofiles.open('System/CSV/System.csv', mode='w' ) as f:
+                    await f.write(csv_output)
+
     async def markdown_file(self, parsed_json):
         template_dir = Path(__file__).resolve().parent
         env = Environment(loader=FileSystemLoader(str(template_dir)), enable_async=True)
@@ -390,6 +404,10 @@ class vDocs():
 
             if api == "/dataservice/data/device/state/SystemStatus":
                 async with aiofiles.open('System Status/Markdown/System Status.md', mode='w' ) as f:
+                    await f.write(markdown_output)
+
+            if api == "/dataservice/data/device/state/System":
+                async with aiofiles.open('System/Markdown/System.md', mode='w' ) as f:
                     await f.write(markdown_output)
 
     async def html_file(self, parsed_json):
@@ -467,6 +485,10 @@ class vDocs():
                 async with aiofiles.open('System Status/HTML/System Status.html', mode='w' ) as f:
                     await f.write(html_output)
 
+            if api == "/dataservice/data/device/state/System":
+                async with aiofiles.open('System/HTML/System.html', mode='w' ) as f:
+                    await f.write(html_output)
+
     async def mindmap_file(self, parsed_json):
         template_dir = Path(__file__).resolve().parent
         env = Environment(loader=FileSystemLoader(str(template_dir)), enable_async=True)
@@ -540,6 +562,10 @@ class vDocs():
 
             if api == "/dataservice/data/device/state/SystemStatus":
                 async with aiofiles.open('System Status/Mindmap/System Status.md', mode='w' ) as f:
+                    await f.write(mindmap_output)
+
+            if api == "/dataservice/data/device/state/System":
+                async with aiofiles.open('System/Mindmap/System.md', mode='w' ) as f:
                     await f.write(mindmap_output)
 
     async def all_files(self, parsed_json):

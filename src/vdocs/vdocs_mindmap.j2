@@ -457,4 +457,20 @@
 #### Storage Disk Mount: {{ device['vmanage-storage-disk-mount'] }}
 #### System IP: {{ device['vmanage-system-ip'] }}
 {%-     endfor %}
+{%- elif api == "/dataservice/data/device/state/System"%}
+# System
+{%-     for device in data_to_template['data'] %}
+## @RID {{ device['@rid'] }}
+### Timestamps
+#### Created: {{ device.createTimeStamp }}
+#### Last Updated: {{ device.lastupdated }}
+### ID
+#### Record: {{ device.recordId }}
+#### UUID: {{ device.uuid }}
+### vDevice
+#### Hostname: {{ device['vdevice-host-name'] }}
+#### Name: {{ device['vdevice-name'] }}
+#### Data Key: {{ device['vdevice-dataKey'] }}
+### vManage System IP: {{ device['vmanage-system-ip'] }}
+{%-     endfor %}
 {%- endif %}

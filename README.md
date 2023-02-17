@@ -32,6 +32,8 @@ Interfaces
 
 OMP Peers
 
+System
+
 System Status
 
 Template Feature Types
