@@ -837,5 +837,115 @@
 {%-     endfor %}
 </tbody>
 </table>
+{%- elif api == "/dataservice/data/device/state/OMPPeer"%}
+<h1>OMP Peers</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>@RID</th>
+    <th>Create Timestamp</th>
+    <th>Domain ID</th>
+    <th>Last Updated</th>
+    <th>Legit</th>
+    <th>Peer</th>
+    <th>Record ID</th>
+    <th>Refresh</th>
+    <th>Site ID</th>
+    <th>State</th>
+    <th>Type</th>
+    <th>vDevice Data Key</th>
+    <th>vDevice Hostname</th>
+    <th>vDevice Name</th>
+    <th>vManage System IP</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for device in data_to_template['data'] %}
+  <tr>
+    <td>{{ device['@rid'] }}</td>
+    <td>{{ device.createTimeStamp }}</td>
+    <td>{{ device['domain-id'] }}</td>
+    <td>{{ device.lastupdated }}</td>
+    <td>{{ device.legit }}</td>
+    <td>{{ device.peer }}</td>
+    <td>{{ device.recordId }}</td>
+    <td>{{ device.refresh }}</td>
+    <td>{{ device['site-id'] }}</td>
+    <td>{{ device.state }}</td>
+    <td>{{ device.type }}</td>
+    <td>{{ device['vdevice-dataKey'] }}</td>
+    <td>{{ device['vdevice-host-name'] }}</td>
+    <td>{{ device['vdevice-name'] }}</td>
+    <td>{{ device['vmanage-system-ip'] }}</td>
+  </tr>
+{%-     endfor %}
+</tbody>
+</table>
+{%- elif api == "/dataservice/data/device/state/SystemStatus"%}
+<h1>System Status</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>@RID</th>
+    <th>Board Type</th>
+    <th>Bootloader Version</th>
+    <th>Build Number</th>
+    <th>Chassis Serial Number</th>
+    <th>Create Timestamp</th>
+    <th>Disk Status</th>
+    <th>FIPS Mode</th>
+    <th>Last Updated</th>
+    <th>Log Host Status</th>
+    <th>Model SKU</th>
+    <th>Personality</th>
+    <th>Reboot Reason</th>
+    <th>Reboot Type</th>
+    <th>Record ID</th>
+    <th>State</th>
+    <th>State Description</th>
+    <th>Testbed Mode</th>
+    <th>Total CPU Count</th>
+    <th>Uptime Date</th>
+    <th>vDevice Data Key</th>
+    <th>vDevice Hostname</th>
+    <th>vDevice Name</th>
+    <th>Version</th>
+    <th>vManage Storage Disk Mount</th>
+    <th>vManage System IP</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for device in data_to_template['data'] %}
+  <tr>
+    <td>{{ device['@rid'] }}</td>
+    <td>{{ device['board_type'] }}</td>
+    <td>{{ device.bootloader_version }}</td>
+    <td>{{ device.build_number | replace("\n","") }}</td>
+    <td>{{ device['chassis-serial-number'] }}</td>
+    <td>{{ device.createTimeStamp }}</td>
+    <td>{{ device.disk_status }}</td>
+    <td>{{ device.fips_mode }}</td>
+    <td>{{ device.lastupdated }}</td>
+    <td>{{ device.loghost_status }}</td>
+    <td>{{ device.model_sku }}</td>
+    <td>{{ device.personality }}</td>
+    <td>{{ device.reboot_reason }}</td>
+    <td>{{ device.reboot_type }}</td>
+    <td>{{ device.recordId }}</td>
+    <td>{{ device.state }}</td>
+    <td>{{ device.state_description }}</td>
+    <td>{{ device.testbed_mode }}</td>
+    <td>{{ device.total_cpu_count }}</td>
+    <td>{{ device['uptime-date'] }}</td>
+    <td>{{ device['vdevice-dataKey'] }}</td>
+    <td>{{ device['vdevice-host-name'] }}</td>
+    <td>{{ device['vdevice-name'] }}</td>
+    <td>{{ device.version }}</td>
+    <td>{{ device['vmanage-storage-disk-mount'] }}</td>
+    <td>{{ device['vmanage-system-ip'] }}</td>
+  </tr>
+{%-     endfor %}
+</tbody>
+</table>
 {%- endif %}
 {%- include 'datatable_footer.j2' %}

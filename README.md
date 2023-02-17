@@ -30,6 +30,10 @@ Hardware Inventory
 
 Interfaces
 
+OMP Peers
+
+System Status
+
 Template Feature Types
 
 Template Features
@@ -87,6 +91,24 @@ Markmap - Mindmap Files
 
 Open in Default Browser - HTML Files
 
+## Always On Sandbox
+
+This code works with the always on sandbox! 
+
+https://devnetsandbox.cisco.com/RM/Diagram/Index/a4ab71bc-f7a0-4d63-bedb-05a051818569?diagramType=Topology
+
+```console
+export URL=https://sandbox-sdwan-2.cisco.com
+export USERNAME=devnetuser
+export PASSWORD='RG!_Yw919_83'
+
+(venv)$ pip install vdocs
+(venv)$ mkdir vdocs_output
+(venv)$ cd vdocs_output
+(venv)/vdocs_output$ vdocs
+(venv)/vdocs_output$ code . 
+(Launches VS Code and you can view the output with the recommended VS Code extensions)
+```
 ## Contact
 
 Please contact John Capobianco if you need any assistance

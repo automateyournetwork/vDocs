@@ -38,6 +38,8 @@ class vDocs():
                     'Hardware Environment',
                     'Hardware Inventory',
                     'Interfaces',
+                    'OMP Peers',
+                    'System Status',
                     'Template Features',
                     'Template Feature Types',
                     'Template Policy List',
@@ -77,6 +79,8 @@ class vDocs():
                 "/dataservice/data/device/state/HardwareEnvironment",
                 "/dataservice/data/device/state/HardwareInventory",
                 "/dataservice/data/device/state/Interface",
+                "/dataservice/data/device/state/OMPPeer",
+                '/dataservice/data/device/state/SystemStatus',
                 "/dataservice/device",
                 "/dataservice/device/monitor",
                 "/dataservice/device/counters",
@@ -159,6 +163,14 @@ class vDocs():
                 async with aiofiles.open('CEdge Interfaces/JSON/CEdge Interfaces.json', mode='w') as f:
                     await f.write(json.dumps(payload, indent=4, sort_keys=True))
 
+            if api == "/dataservice/data/device/state/OMPPeer":
+                async with aiofiles.open('OMP Peers/JSON/OMP Peer.json', mode='w') as f:
+                    await f.write(json.dumps(payload, indent=4, sort_keys=True))
+
+            if api == "/dataservice/data/device/state/SystemStatus":
+                async with aiofiles.open('System Status/JSON/System Status.json', mode='w') as f:
+                    await f.write(json.dumps(payload, indent=4, sort_keys=True))
+
     async def yaml_file(self, parsed_json):
         for api, payload in json.loads(parsed_json):
             clean_yaml = yaml.dump(payload, default_flow_style=False)
@@ -220,6 +232,14 @@ class vDocs():
 
             if api == "/dataservice/data/device/state/CEdgeInterface":
                 async with aiofiles.open('CEdge Interfaces/YAML/CEdge Interfaces.yaml', mode='w' ) as f:
+                    await f.write(clean_yaml)
+
+            if api == "/dataservice/data/device/state/OMPPeer":
+                async with aiofiles.open('OMP Peers/YAML/OMP Peers.yaml', mode='w' ) as f:
+                    await f.write(clean_yaml)
+
+            if api == "/dataservice/data/device/state/SystemStatus":
+                async with aiofiles.open('System Status/YAML/System Status.yaml', mode='w' ) as f:
                     await f.write(clean_yaml)
 
     async def csv_file(self, parsed_json):
@@ -289,6 +309,14 @@ class vDocs():
                 async with aiofiles.open('CEdge Interfaces/CSV/CEdge Interfaces.csv', mode='w' ) as f:
                     await f.write(csv_output)
 
+            if api == "/dataservice/data/device/state/OMPPeer":
+                async with aiofiles.open('OMP Peers/CSV/OMP Peers.csv', mode='w' ) as f:
+                    await f.write(csv_output)
+
+            if api == "/dataservice/data/device/state/SystemStatus":
+                async with aiofiles.open('System Status/CSV/System Status.csv', mode='w' ) as f:
+                    await f.write(csv_output)
+
     async def markdown_file(self, parsed_json):
         template_dir = Path(__file__).resolve().parent
         env = Environment(loader=FileSystemLoader(str(template_dir)), enable_async=True)
@@ -354,7 +382,15 @@ class vDocs():
 
             if api == "/dataservice/data/device/state/CEdgeInterface":
                 async with aiofiles.open('CEdge Interfaces/Markdown/CEdge Interfaces.md', mode='w' ) as f:
-                    await f.write(markdown_output) 
+                    await f.write(markdown_output)
+
+            if api == "/dataservice/data/device/state/OMPPeer":
+                async with aiofiles.open('OMP Peers/Markdown/OMP Peers.md', mode='w' ) as f:
+                    await f.write(markdown_output)
+
+            if api == "/dataservice/data/device/state/SystemStatus":
+                async with aiofiles.open('System Status/Markdown/System Status.md', mode='w' ) as f:
+                    await f.write(markdown_output)
 
     async def html_file(self, parsed_json):
         template_dir = Path(__file__).resolve().parent
@@ -423,6 +459,14 @@ class vDocs():
                 async with aiofiles.open('CEdge Interfaces/HTML/CEdge Interfaces.html', mode='w' ) as f:
                     await f.write(html_output)
 
+            if api == "/dataservice/data/device/state/CEdgeInterface":
+                async with aiofiles.open('OMP Peers/HTML/OMP Peers.html', mode='w' ) as f:
+                    await f.write(html_output)
+
+            if api == "/dataservice/data/device/state/SystemStatus":
+                async with aiofiles.open('System Status/HTML/System Status.html', mode='w' ) as f:
+                    await f.write(html_output)
+
     async def mindmap_file(self, parsed_json):
         template_dir = Path(__file__).resolve().parent
         env = Environment(loader=FileSystemLoader(str(template_dir)), enable_async=True)
@@ -488,6 +532,14 @@ class vDocs():
 
             if api == "/dataservice/data/device/state/CEdgeInterface":
                 async with aiofiles.open('CEdge Interfaces/Mindmap/CEdge Interfaces.md', mode='w' ) as f:
+                    await f.write(mindmap_output)
+
+            if api == "/dataservice/data/device/state/OMPPeer":
+                async with aiofiles.open('OMP Peers/Mindmap/OMP Peers.md', mode='w' ) as f:
+                    await f.write(mindmap_output)
+
+            if api == "/dataservice/data/device/state/SystemStatus":
+                async with aiofiles.open('System Status/Mindmap/System Status.md', mode='w' ) as f:
                     await f.write(mindmap_output)
 
     async def all_files(self, parsed_json):

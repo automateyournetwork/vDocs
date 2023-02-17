@@ -401,4 +401,60 @@
 ### vManage System IP: {{ device['vmanage-system-ip'] }}
 ### VPN ID: {{ device['vpn-id'] }}
 {%-     endfor %}
+{%- elif api == "/dataservice/data/device/state/OMPPeer"%}
+# OMP Peers
+{%-     for device in data_to_template['data'] %}
+## @RID: {{ device['@rid'] }}
+### Timestamps
+#### Created: {{ device.createTimeStamp }}
+#### Last Updated: {{ device.lastupdated }}
+### Domain ID: {{ device['domain-id'] }}
+### Legit: {{ device.legit }}
+### Peer: {{ device.peer }}
+### Record ID: {{ device.recordId }}
+### Refresh: {{ device.refresh }}
+### Site ID: {{ device['site-id'] }}
+### State: {{ device.state }}
+### Type: {{ device.type }}
+### vDevice
+#### Hostname: {{ device['vdevice-host-name'] }}
+#### Name: {{ device['vdevice-name'] }}
+#### Data Key: {{ device['vdevice-dataKey'] }}
+### vManage System IP: {{ device['vmanage-system-ip'] }}
+{%-     endfor %}
+{%- elif api == "/dataservice/data/device/state/SystemStatus"%}
+# System Status
+{%-     for device in data_to_template['data'] %}
+## @RID: {{ device['@rid'] }}
+### Board Type: {{ device['board_type'] }}
+### Boot Loader Version: {{ device.bootloader_version }}
+### Build Number: {{ device.build_number | replace("\n","") }}
+### Chassis Serial Number: {{ device['chassis-serial-number'] }}
+### Timestamps
+#### Created: {{ device.createTimeStamp }}
+#### Last Updated: {{ device.lastupdated }}
+#### Uptime Date: {{ device['uptime-date'] }}
+### Disk Status: {{ device.disk_status }}
+### FIPS Mode: {{ device.fips_mode }}
+### Log Host Status: {{ device.loghost_status }}
+### Model SKU: {{ device.model_sku }}
+### Personality: {{ device.personality }}
+### Reboot
+#### Reason: {{ device.reboot_reason }}
+#### Type: {{ device.reboot_type }}
+### Record ID: {{ device.recordId }}
+### State
+#### State: {{ device.state }}
+#### State description: {{ device.state_description }}
+### Testbed Mode: {{ device.testbed_mode }}
+### Total CPU Count: {{ device.total_cpu_count }}
+### vDevice
+#### Hostname: {{ device['vdevice-host-name'] }}
+#### Name: {{ device['vdevice-name'] }}
+#### Data Key: {{ device['vdevice-dataKey'] }}
+### Version: {{ device.version }}
+### vManage
+#### Storage Disk Mount: {{ device['vmanage-storage-disk-mount'] }}
+#### System IP: {{ device['vmanage-system-ip'] }}
+{%-     endfor %}
 {%- endif %}
