@@ -63,7 +63,7 @@ $ source sdwan/bin/activate
 ## Usage - Interactive
 
 ```console
-(sdwan) $ aceye
+(sdwan) $ vdocs
 vManage URL: <URL to vManage>
 vManage Username: <vManage Username>
 vManage Password: <vManage Password>
