@@ -6,6 +6,8 @@ Business Ready Documents for Cisco SD-WAN vManage
 
 BFD Sessions
 
+CEdge Interfaces
+
 Control Connection
 
 Control Local Property
@@ -21,6 +23,8 @@ Fabric Devices
 Hardware Environment
 
 Hardware Inventory
+
+Interfaces
 
 Template Feature Types
 

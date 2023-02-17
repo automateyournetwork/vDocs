@@ -761,5 +761,81 @@
 {%-     endfor %}
 </tbody>
 </table>
+{%- elif api == "/dataservice/data/device/state/CEdgeInterface"%}
+<h1>CEdge Interfaces</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>@RID</th>
+    <th>BIA Address</th>
+    <th>Create Timestamp</th>
+    <th>Hardware Address</th>
+    <th>Interface Admin Status</th>
+    <th>Interface Oper Status</th>
+    <th>Interface Index</th>
+    <th>Interface Name</th>
+    <th>Interface Type</th>
+    <th>IP Address</th>
+    <th>IPv4 Subnet Mask</th>
+    <th>IPv4 TCP Adjust MSS</th>
+    <th>IPv6 Address</th>
+    <th>IPv6 TCP Adjust MSS</th>
+    <th>Last Updated</th>
+    <th>MTU</th>
+    <th>Record ID</th>
+    <th>RX Drops</th>
+    <th>RX Errors</th>
+    <th>RX Octets</th>
+    <th>RX Packets</th>
+    <th>Speed Mbps</th>
+    <th>TX Drops</th>
+    <th>TX Errors</th>
+    <th>TX Octets</th>
+    <th>TX Packets</th>
+    <th>vDevice Data Key</th>
+    <th>vDevice Hostname</th>
+    <th>vDevice Name</th>
+    <th>vManage System IP</th>
+    <th>VPN ID</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for device in data_to_template['data'] %}
+  <tr>
+    <td>{{ device['@rid'] }}</td>
+    <td>{{ device['bia-address'] }}</td>
+    <td>{{ device.createTimeStamp }}</td>
+    <td>{{ device.hwaddr }}</td>
+    <td>{{ device['if-admin-status'] }}</td>
+    <td>{{ device['if-oper-status'] }}</td>
+    <td>{{ device.ifindex }}</td>
+    <td>{{ device.ifname }}</td>
+    <td>{{ device['interface-type'] }}</td>
+    <td>{{ device['ip-address'] }}</td>
+    <td>{{ device['ipv4-subnet-mask'] }}</td>
+    <td>{{ device['ipv4-tcp-adjust-mss'] }}</td>
+    <td>{{ device['ipv6-addrs'] }}</td>
+    <td>{{ device['ipv6-tcp-adjust-mss'] }}</td>
+    <td>{{ device.lastupdated }}</td>
+    <td>{{ device.mtu }}</td>
+    <td>{{ device.recordId }}</td>
+    <td>{{ device['rx-drops'] }}</td>
+    <td>{{ device['rx-errors'] }}</td>
+    <td>{{ device['rx-octets'] }}</td>
+    <td>{{ device['rx-packets'] }}</td>
+    <td>{{ device['speed-mbps'] }}</td>
+    <td>{{ device['tx-drops'] }}</td>
+    <td>{{ device['tx-errors'] }}</td>
+    <td>{{ device['tx-octets'] }}</td>
+    <td>{{ device['tx-packets'] }}</td>
+    <td>{{ device['vdevice-dataKey'] }}</td>
+    <td>{{ device['vdevice-host-name'] }}</td>
+    <td>{{ device['vdevice-name'] }}</td>
+    <td>{{ device['vmanage-system-ip'] }}</td>
+    <td>{{ device['vpn-id'] }}</td>
+  </tr>
+{%-     endfor %}
+</tbody>
+</table>
 {%- endif %}
 {%- include 'datatable_footer.j2' %}

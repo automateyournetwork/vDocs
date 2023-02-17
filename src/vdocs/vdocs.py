@@ -28,6 +28,7 @@ class vDocs():
 
     def make_directories(self):
         api_list = ['BFD Sessions',
+                    'CEdge Interfaces',
                     'Control Connection',
                     'Control Local Property',
                     'Control WAN Interfaces',
@@ -36,7 +37,7 @@ class vDocs():
                     'Fabric Devices',
                     'Hardware Environment',
                     'Hardware Inventory',
-                    'Interface',
+                    'Interfaces',
                     'Template Features',
                     'Template Feature Types',
                     'Template Policy List',
@@ -69,6 +70,7 @@ class vDocs():
         return response.cookies
 
     api_list = ["/dataservice/data/device/state/BFDSessions",
+                '/dataservice/data/device/state/CEdgeInterface',
                 "/dataservice/data/device/state/ControlConnection",
                 "/dataservice/data/device/state/ControlLocalProperty",
                 "/dataservice/data/device/state/ControlWanInterface",
@@ -150,7 +152,11 @@ class vDocs():
                     await f.write(json.dumps(payload, indent=4, sort_keys=True))
 
             if api == "/dataservice/data/device/state/Interface":
-                async with aiofiles.open('Interface/JSON/Interface.json', mode='w') as f:
+                async with aiofiles.open('Interfaces/JSON/Interfaces.json', mode='w') as f:
+                    await f.write(json.dumps(payload, indent=4, sort_keys=True))
+
+            if api == "/dataservice/data/device/state/CEdgeInterface":
+                async with aiofiles.open('CEdge Interfaces/JSON/CEdge Interfaces.json', mode='w') as f:
                     await f.write(json.dumps(payload, indent=4, sort_keys=True))
 
     async def yaml_file(self, parsed_json):
@@ -209,7 +215,11 @@ class vDocs():
                     await f.write(clean_yaml)
 
             if api == "/dataservice/data/device/state/Interface":
-                async with aiofiles.open('Interface/YAML/Interface.yaml', mode='w' ) as f:
+                async with aiofiles.open('Interfaces/YAML/Interfaces.yaml', mode='w' ) as f:
+                    await f.write(clean_yaml)
+
+            if api == "/dataservice/data/device/state/CEdgeInterface":
+                async with aiofiles.open('CEdge Interfaces/YAML/CEdge Interfaces.yaml', mode='w' ) as f:
                     await f.write(clean_yaml)
 
     async def csv_file(self, parsed_json):
@@ -272,7 +282,11 @@ class vDocs():
                     await f.write(csv_output)
 
             if api == "/dataservice/data/device/state/Interface":
-                async with aiofiles.open('Interface/CSV/Interface.csv', mode='w' ) as f:
+                async with aiofiles.open('Interfaces/CSV/Interfaces.csv', mode='w' ) as f:
+                    await f.write(csv_output)
+
+            if api == "/dataservice/data/device/state/CEdgeInterface":
+                async with aiofiles.open('CEdge Interfaces/CSV/CEdge Interfaces.csv', mode='w' ) as f:
                     await f.write(csv_output)
 
     async def markdown_file(self, parsed_json):
@@ -335,7 +349,11 @@ class vDocs():
                     await f.write(markdown_output)                    
 
             if api == "/dataservice/data/device/state/Interface":
-                async with aiofiles.open('Interface/Markdown/Interface.md', mode='w' ) as f:
+                async with aiofiles.open('Interfaces/Markdown/Interfaces.md', mode='w' ) as f:
+                    await f.write(markdown_output) 
+
+            if api == "/dataservice/data/device/state/CEdgeInterface":
+                async with aiofiles.open('CEdge Interfaces/Markdown/CEdge Interfaces.md', mode='w' ) as f:
                     await f.write(markdown_output) 
 
     async def html_file(self, parsed_json):
@@ -398,7 +416,11 @@ class vDocs():
                     await f.write(html_output)
 
             if api == "/dataservice/data/device/state/Interface":
-                async with aiofiles.open('Interface/HTML/Interface.html', mode='w' ) as f:
+                async with aiofiles.open('Interfaces/HTML/Interfaces.html', mode='w' ) as f:
+                    await f.write(html_output)
+
+            if api == "/dataservice/data/device/state/CEdgeInterface":
+                async with aiofiles.open('CEdge Interfaces/HTML/CEdge Interfaces.html', mode='w' ) as f:
                     await f.write(html_output)
 
     async def mindmap_file(self, parsed_json):
@@ -461,11 +483,21 @@ class vDocs():
                     await f.write(mindmap_output)
 
             if api == "/dataservice/data/device/state/Interface":
-                async with aiofiles.open('Interface/Mindmap/Interface.md', mode='w' ) as f:
+                async with aiofiles.open('Interfaces/Mindmap/Interfaces.md', mode='w' ) as f:
+                    await f.write(mindmap_output)
+
+            if api == "/dataservice/data/device/state/CEdgeInterface":
+                async with aiofiles.open('CEdge Interfaces/Mindmap/CEdge Interfaces.md', mode='w' ) as f:
                     await f.write(mindmap_output)
 
     async def all_files(self, parsed_json):
-        await asyncio.gather(self.json_file(parsed_json), self.yaml_file(parsed_json), self.csv_file(parsed_json), self.markdown_file(parsed_json), self.html_file(parsed_json), self.mindmap_file(parsed_json))
+        await asyncio.gather(self.json_file(parsed_json),
+                             self.yaml_file(parsed_json),
+                             self.csv_file(parsed_json),
+                             self.markdown_file(parsed_json),
+                             self.html_file(parsed_json),
+                             self.mindmap_file(parsed_json)
+                             )
 
 @click.command()
 @click.option('--url',

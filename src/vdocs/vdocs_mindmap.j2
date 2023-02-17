@@ -360,4 +360,45 @@
 ### vManage System IP: {{ device['vmanage-system-ip'] }}
 ### VPN ID: {{ device['vpn-id'] }}
 {%-     endfor %}
+{%- elif api == "/dataservice/data/device/state/CEdgeInterface"%}
+# CEdge Interfaces
+{%-     for device in data_to_template['data'] %}
+## @RID: {{ device['@rid'] }}
+### Timestamps
+#### Created: {{ device.createTimeStamp }}
+#### Last Updated: {{ device.lastupdated }}
+### BIA Address: {{ device['bia-address'] }}
+### Hardware Address: {{ device.hwaddr }}
+### Interface Status
+#### Admin: {{ device['if-admin-status'] }}
+#### Oper: {{ device['if-oper-status'] }}
+### Index: {{ device.ifindex }}
+### Name: {{ device.ifname }}
+### Type: {{ device['interface-type'] }}
+### IP Address
+#### v4: {{ device['ip-address'] }}
+### Subnet Mask: {{ device['ipv4-subnet-mask'] }}
+### TCP Adjust MSS: {{ device['ipv4-tcp-adjust-mss'] }}
+### v6: {{ device['ipv6-addrs'] }}
+### v6 TCP Adjust MSS: {{ device['ipv6-tcp-adjust-mss'] }}
+### MTU: {{ device.mtu }}
+### Record ID: {{ device.recordId }}
+### RX
+#### Drops: {{ device['rx-drops'] }}
+#### Errors: {{ device['rx-errors'] }}
+#### Octects: {{ device['rx-octets'] }}
+#### Packets: {{ device['rx-packets'] }}
+### Speed Mbps: {{ device['speed-mbps'] }}
+### Tx
+#### Drops: {{ device['tx-drops'] }}
+#### Errors: {{ device['tx-errors'] }}
+#### Octets: {{ device['tx-octets'] }}
+#### Packets: {{ device['tx-packets'] }}
+### vDevice
+#### Hostname: {{ device['vdevice-host-name'] }}
+#### Name: {{ device['vdevice-name'] }}
+#### Data Key: {{ device['vdevice-dataKey'] }}
+### vManage System IP: {{ device['vmanage-system-ip'] }}
+### VPN ID: {{ device['vpn-id'] }}
+{%-     endfor %}
 {%- endif %}
