@@ -473,4 +473,63 @@
 #### Data Key: {{ device['vdevice-dataKey'] }}
 ### vManage System IP: {{ device['vmanage-system-ip'] }}
 {%-     endfor %}
+{%- elif "/dataservice/device/arp?deviceId=" in api %}
+# ARP Interfaces
+{%-     for interface in data_to_template['data'] %}
+## Interface Name: {{ interface['if-name'] }}
+### IP: {{ interface.ip }}
+### Timestamps
+#### Last Updated: {{ interface.lastupdated }}
+#### Uptime: {{ interface.uptime }}
+#### Uptime Date: {{ interface['uptime-date'] }}
+### MAC: {{ interface.mac }}
+### State: {{ interface.state }}
+### vDevice
+#### Hostname: {{ interface['vdevice-host-name'] }}
+#### Name: {{ interface['vdevice-name'] }}
+#### Data Key: {{ interface['vdevice-dataKey'] }}
+### VPN ID: {{ interface['vpn-id'] }}
+{%-     endfor %}
+{%- elif "/dataservice/device/bfd/summary?deviceId=" in api %}
+# BFD Summary
+{%-     for device in data_to_template['data'] %}
+## Hostname: {{ device['vdevice-host-name'] }}
+### BFD Sessions
+#### Flap: {{ device['bfd-sessions-flap'] }}
+#### Max: {{ device['bfd-sessions-max'] }}
+#### Total: {{ device['bfd-sessions-total'] }}
+###: Up: {{ device['bfd-sessions-up'] }}
+### Last Updated: {{ device['lastupdated'] }}
+### Poll Interval: {{ device['poll-interval'] }}
+### vDevice
+#### Data Key: {{ device['vdevice-dataKey'] }}
+#### Name: {{ device['vdevice-name'] }}
+{%-     endfor %}
+{%- elif "/dataservice/device/bfd/sessions?deviceId=" in api %}
+# BFD Sessions From Device
+{%-     for device in data_to_template['data'] %}
+## Color: {{ device.color }}
+### Detect Multiplier: {{ device['detect-multiplier'] }}
+### Destination
+#### IP: {{ device['dst-ip'] }}
+#### Port: {{ device['dst-port'] }}
+### Timestamps
+#### Last Updated: {{ device.lastupdated }}
+#### Uptime: {{ device.uptime }}
+#### Uptime Date: {{ device['uptime-date'] }}
+### Local Color: {{ device['local-color'] }}
+### Protocol: {{ device.proto }}
+### Site ID: {{ device['site-id'] }}
+### Source:
+#### IP: {{ device['src-ip'] }}
+#### Port: {{ device['src-port'] }}
+### State: {{ device.state }}
+### System IP: {{ device['system-ip'] }}
+### Transitions: {{ device.transitions }}
+### TX Interval: {{ device['tx-interval'] }}
+### vDevice
+#### Hostname: {{ device['vdevice-host-name'] }}
+#### Name: {{ device['vdevice-name'] }}
+#### Data Key: {{ device['vdevice-dataKey'] }}
+{%-     endfor %}
 {%- endif %}

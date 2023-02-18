@@ -979,5 +979,125 @@
 {%-     endfor %}
 </tbody>
 </table>
+{%- elif "/dataservice/device/arp?deviceId=" in api %}
+<h1>ARP Interfaces</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>Interface Name</th>
+    <th>IP</th>
+    <th>Last Updated</th>
+    <th>MAC</th>
+    <th>State</th>
+    <th>Uptime</th>
+    <th>Uptime Date</th>
+    <th>vDevice Data Key</th>
+    <th>vDevice Hostname</th>
+    <th>vDevice Name</th>
+    <th>VPN ID</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for interface in data_to_template['data'] %}
+  <tr>
+    <td>{{ interface['if-name'] }}</td>
+    <td>{{ interface.ip }}</td>
+    <td>{{ interface.lastupdated }}</td>
+    <td>{{ interface.mac }}</td>
+    <td>{{ interface.state }}</td>
+    <td>{{ interface.uptime }}</td>
+    <td>{{ interface['uptime-date'] }}</td>
+    <td>{{ interface['vdevice-dataKey'] }}</td>
+    <td>{{ interface['vdevice-host-name'] }}</td>
+    <td>{{ interface['vdevice-name'] }}</td>
+    <td>{{ interface['vpn-id'] }}</td>
+  </tr>
+{%-     endfor %}
+</tbody>
+</table>
+{%- elif "/dataservice/device/bfd/summary?deviceId=" in api %}
+<h1>BFD Summary</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>vDevice Hostname</th>
+    <th>BFD Sessions Flap</th>
+    <th>BFD Sessions Max</th>
+    <th>BFD Sessions Total</th>
+    <th>BFD Sessions Up</th>
+    <th>Last Updated</th>
+    <th>Poll Interval</th>
+    <th>vDevice Data Key</th>
+    <th>vDevice Name</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for device in data_to_template['data'] %}
+  <tr>
+    <td>{{ device['vdevice-host-name'] }}</td>
+    <td>{{ device['bfd-sessions-flap'] }}</td>
+    <td>{{ device['bfd-sessions-max'] }}</td>
+    <td>{{ device['bfd-sessions-total'] }}</td>
+    <td>{{ device['bfd-sessions-up'] }}</td>
+    <td>{{ device['lastupdated'] }}</td>
+    <td>{{ device['poll-interval'] }}</td>
+    <td>{{ device['vdevice-dataKey'] }}</td>
+    <td>{{ device['vdevice-name'] }}</td>
+  </tr>
+{%-     endfor %}
+</tbody>
+</table>
+{%- elif "/dataservice/device/bfd/sessions?deviceId=" in api %}
+<h1>BFD Sessions From Device</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>Color</th>
+    <th>Detect Multiplier</th>
+    <th>Destination IP</th>
+    <th>Destination Port</th>
+    <th>Last Updated</th>
+    <th>Local Color</th>
+    <th>Protocol</th>
+    <th>Site ID</th>
+    <th>Source IP</th>
+    <th>Source Port</th>
+    <th>State</th>
+    <th>System IP</th>
+    <th>Transitions</th>
+    <th>TX Interval</th>
+    <th>Uptime</th>
+    <th>Uptime Date</th>
+    <th>vDevice Data Key</th>
+    <th>vDevice Hostname</th>
+    <th>vDevice Name</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for device in data_to_template['data'] %}
+  <tr>
+    <td>{{ device.color }}</td>
+    <td>{{ device['detect-multiplier'] }}</td>
+    <td>{{ device['dst-ip'] }}</td>
+    <td>{{ device['dst-port'] }}</td>
+    <td>{{ device.lastupdated }}</td>
+    <td>{{ device['local-color'] }}</td>
+    <td>{{ device.proto }}</td>
+    <td>{{ device['site-id'] }}</td>
+    <td>{{ device['src-ip'] }}</td>
+    <td>{{ device['src-port'] }}</td>
+    <td>{{ device.state }}</td>
+    <td>{{ device['system-ip'] }}</td>
+    <td>{{ device.transitions }}</td>
+    <td>{{ device['tx-interval'] }}</td>
+    <td>{{ device.uptime }}</td>
+    <td>{{ device['uptime-date'] }}</td>
+    <td>{{ device['vdevice-dataKey'] }}</td>
+    <td>{{ device['vdevice-host-name'] }}</td>
+    <td>{{ device['vdevice-name'] }}</td>
+  </tr>
+{%-     endfor %}
+</tbody>
+</table>
 {%- endif %}
 {%- include 'datatable_footer.j2' %}

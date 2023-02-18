@@ -115,4 +115,22 @@
 {%-     for device in data_to_template['data'] %}
 | {{ device['@rid'] }} | {{ device.createTimeStamp }} | {{ device.lastupdated }} | {{ device.recordId }} | {{ device.uuid }} | {{ device['vdevice-dataKey'] }} | {{ device['vdevice-host-name'] }} | {{ device['vdevice-name'] }} | {{ device['vmanage-system-ip'] }} |
 {%-     endfor %}
+{%- elif "/dataservice/device/arp?deviceId=" in api %}# ARP Interfaces
+| Interface Name | IP | Last Updated | MAC | State | Uptime | Uptime Date | vDevice Data Key | vDevice Hostname | vDevice Name | VPN ID |
+| -------------- | -- | ------------ | --- | ----- | ------ | ----------- | ---------------- | ---------------- | ------------ | ------ |
+{%-     for interface in data_to_template['data'] %}
+| {{ interface['if-name'] }} | {{ interface.ip }} | {{ interface.lastupdated }} | {{ interface.mac }} | {{ interface.state }} | {{ interface.uptime }} | {{ interface['uptime-date'] }} | {{ interface['vdevice-dataKey'] }} | {{ interface['vdevice-host-name'] }} | {{ interface['vdevice-name'] }} | {{ interface['vpn-id'] }} |
+{%-     endfor %}
+{%- elif "/dataservice/device/bfd/summary?deviceId=" in api %}# BFD Summary
+| vDevice Hostname | BFD Sessions Flap | BFD Sessions Max | BFD Sessions Total | BFD Sessions Up | Last Updated | Poll Interval | vDevice Data Key | vDevice Name |
+| ---------------- | ----------------- | ---------------- | ------------------ | --------------- | ------------ | ------------- | ---------------- | ------------ |
+{%-     for device in data_to_template['data'] %}
+| {{ device['vdevice-host-name'] }} | {{ device['bfd-sessions-flap'] }} | {{ device['bfd-sessions-max'] }} | {{ device['bfd-sessions-total'] }} | {{ device['bfd-sessions-up'] }} | {{ device['lastupdated'] }} | {{ device['poll-interval'] }} | {{ device['vdevice-dataKey'] }} | {{ device['vdevice-name'] }} |
+{%-     endfor %}
+{%- elif "/dataservice/device/bfd/sessions?deviceId=" in api %}# BFD Sessions From Device
+| Color | Detect Multiplier | Destination IP | Destination Port | Last Updated | Local Color | Protocol | Site ID | Source IP | Source Port | State | System IP | Transitions | TX Interval | Uptime | Uptime Date | vDevice Data Key | vDevice Hostname | vDevice Name |
+| ----- | ----------------- | -------------- | ---------------- | ------------ | ----------- | -------- | ------- | --------- | ----------- | ----- | --------- | ----------- | ----------- | ------ | ----------- | ---------------- | ---------------- | ------------ |
+{%-     for device in data_to_template['data'] %}
+| {{ device.color }} | {{ device['detect-multiplier'] }} | {{ device['dst-ip'] }} | {{ device['dst-port'] }} | {{ device.lastupdated }} | {{ device['local-color'] }} | {{ device.proto }} | {{ device['site-id'] }} | {{ device['src-ip'] }} | {{ device['src-port'] }} | {{ device.state }} | {{ device['system-ip'] }} | {{ device.transitions }} | {{ device['tx-interval'] }} | {{ device.uptime }} | {{ device['uptime-date'] }} | {{ device['vdevice-dataKey'] }} | {{ device['vdevice-host-name'] }} | {{ device['vdevice-name'] }} |
+{%-     endfor %}
 {%- endif %}
