@@ -8,7 +8,13 @@ Business Ready Documents for Cisco SD-WAN vManage
 
 ## Current API Coverage
 
+ARP Interfaces
+
 BFD Sessions
+
+BFD Sessions from Device
+
+BFD Summary
 
 CEdge Interfaces
 

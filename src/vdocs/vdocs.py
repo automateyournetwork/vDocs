@@ -24,10 +24,15 @@ class vDocs():
     def vDocs(self):
         self.make_directories()
         self.cookie = self.get_token()
+        self.device_list = asyncio.run(self.build_device_list())
+        asyncio.run(self.add_device_apis())
         asyncio.run(self.main())
 
     def make_directories(self):
-        api_list = ['BFD Sessions',
+        api_list = ['ARP Interfaces',
+                    'BFD Sessions',
+                    'BFD Sessions From Device',
+                    'BFD Summary',
                     'CEdge Interfaces',
                     'Control Connection',
                     'Control Local Property',
@@ -72,6 +77,25 @@ class vDocs():
         print(f"<Authentication Status code {response.status_code} for { url }>")
         return response.cookies
 
+    async def build_device_list(self):
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f"{self.vManage}/dataservice/device",cookies = self.cookie, verify_ssl=False) as resp:
+                response_dict = await resp.json()
+                print(f"Status Code {resp.status}")
+                return (response_dict)    
+
+    async def add_device_apis(self):
+        #ARP
+        for device in self.device_list['data']:
+            arp_api = f"/dataservice/device/arp?deviceId={ device['deviceId'] }"
+            self.api_list.append(arp_api)
+        #BFD Summary
+            bfd_summary_api = f"/dataservice/device/bfd/summary?deviceId={ device['deviceId'] }"
+            self.api_list.append(bfd_summary_api)
+        #BFD Sessions from Device
+            bfd_session_from_device_api = f"/dataservice/device/bfd/sessions?deviceId={ device['deviceId'] }"
+            self.api_list.append(bfd_session_from_device_api)
+            
     api_list = ["/dataservice/data/device/state/BFDSessions",
                 '/dataservice/data/device/state/CEdgeInterface',
                 "/dataservice/data/device/state/ControlConnection",
@@ -177,6 +201,21 @@ class vDocs():
                 async with aiofiles.open('System/JSON/System.json', mode='w') as f:
                     await f.write(json.dumps(payload, indent=4, sort_keys=True))
 
+            for device in self.device_list['data']:
+                if f"/dataservice/device/arp?deviceId={ device['deviceId'] }" in api:
+                    async with aiofiles.open(f"ARP Interfaces/JSON/ARP Interfaces { device['deviceId'] }.json", mode='w') as f:
+                        await f.write(json.dumps(payload, indent=4, sort_keys=True))
+
+            for device in self.device_list['data']:
+                if f"/dataservice/device/bfd/summary?deviceId={ device['deviceId'] }" in api:
+                    async with aiofiles.open(f"BFD Summary/JSON/BFD Summary { device['deviceId'] }.json", mode='w') as f:
+                        await f.write(json.dumps(payload, indent=4, sort_keys=True))
+
+            for device in self.device_list['data']:
+                if f"/dataservice/device/bfd/sessions?deviceId={ device['deviceId'] }" in api:
+                    async with aiofiles.open(f"BFD Sessions From Device/JSON/BFD Sessions From { device['deviceId'] }.json", mode='w') as f:
+                        await f.write(json.dumps(payload, indent=4, sort_keys=True))
+
     async def yaml_file(self, parsed_json):
         for api, payload in json.loads(parsed_json):
             clean_yaml = yaml.dump(payload, default_flow_style=False)
@@ -251,6 +290,21 @@ class vDocs():
             if api == "/dataservice/data/device/state/System":
                 async with aiofiles.open('System/YAML/System.yaml', mode='w' ) as f:
                     await f.write(clean_yaml)
+
+            for device in self.device_list['data']:
+                if f"/dataservice/device/arp?deviceId={ device['deviceId'] }" in api:
+                    async with aiofiles.open(f"ARP Interfaces/YAML/ARP Interfaces { device['deviceId'] }.yaml", mode='w') as f:
+                        await f.write(clean_yaml)
+
+            for device in self.device_list['data']:
+                if f"/dataservice/device/bfd/summary?deviceId={ device['deviceId'] }" in api:
+                    async with aiofiles.open(f"BFD Summary/YAML/BFD Summary { device['deviceId'] }.yaml", mode='w') as f:
+                        await f.write(clean_yaml)
+
+            for device in self.device_list['data']:
+                if f"/dataservice/device/bfd/sessions?deviceId={ device['deviceId'] }" in api:
+                    async with aiofiles.open(f"BFD Sessions From Device/YAML/BFD Sessions From { device['deviceId'] }.yaml", mode='w') as f:
+                        await f.write(clean_yaml)
 
     async def csv_file(self, parsed_json):
         template_dir = Path(__file__).resolve().parent
@@ -331,6 +385,21 @@ class vDocs():
                 async with aiofiles.open('System/CSV/System.csv', mode='w' ) as f:
                     await f.write(csv_output)
 
+            for device in self.device_list['data']:
+                if f"/dataservice/device/arp?deviceId={ device['deviceId'] }" in api:
+                    async with aiofiles.open(f"ARP Interfaces/CSV/ARP Interfaces { device['deviceId'] }.csv", mode='w') as f:
+                        await f.write(csv_output)
+
+            for device in self.device_list['data']:
+                if f"/dataservice/device/bfd/summary?deviceId={ device['deviceId'] }" in api:
+                    async with aiofiles.open(f"BFD Summary/CSV/BFD Summary { device['deviceId'] }.csv", mode='w') as f:
+                        await f.write(csv_output)
+
+            for device in self.device_list['data']:
+                if f"/dataservice/device/bfd/sessions?deviceId={ device['deviceId'] }" in api:
+                    async with aiofiles.open(f"BFD Sessions From Device/CSV/BFD Sessions From { device['deviceId'] }.csv", mode='w') as f:
+                        await f.write(csv_output)
+
     async def markdown_file(self, parsed_json):
         template_dir = Path(__file__).resolve().parent
         env = Environment(loader=FileSystemLoader(str(template_dir)), enable_async=True)
@@ -409,6 +478,21 @@ class vDocs():
             if api == "/dataservice/data/device/state/System":
                 async with aiofiles.open('System/Markdown/System.md', mode='w' ) as f:
                     await f.write(markdown_output)
+
+            for device in self.device_list['data']:
+                if f"/dataservice/device/arp?deviceId={ device['deviceId'] }" in api:
+                    async with aiofiles.open(f"ARP Interfaces/Markdown/ARP Interfaces { device['deviceId'] }.md", mode='w') as f:
+                        await f.write(markdown_output)
+
+            for device in self.device_list['data']:
+                if f"/dataservice/device/bfd/summary?deviceId={ device['deviceId'] }" in api:
+                    async with aiofiles.open(f"BFD Summary/Markdown/BFD Summary { device['deviceId'] }.md", mode='w') as f:
+                        await f.write(markdown_output)
+
+            for device in self.device_list['data']:
+                if f"/dataservice/device/bfd/sessions?deviceId={ device['deviceId'] }" in api:
+                    async with aiofiles.open(f"BFD Sessions From Device/Markdown/BFD Sessions From { device['deviceId'] }.md", mode='w') as f:
+                        await f.write(markdown_output)
 
     async def html_file(self, parsed_json):
         template_dir = Path(__file__).resolve().parent
@@ -489,6 +573,21 @@ class vDocs():
                 async with aiofiles.open('System/HTML/System.html', mode='w' ) as f:
                     await f.write(html_output)
 
+            for device in self.device_list['data']:
+                if f"/dataservice/device/arp?deviceId={ device['deviceId'] }" in api:
+                    async with aiofiles.open(f"ARP Interfaces/HTML/ARP Interfaces { device['deviceId'] }.html", mode='w') as f:
+                        await f.write(html_output)
+
+            for device in self.device_list['data']:
+                if f"/dataservice/device/bfd/summary?deviceId={ device['deviceId'] }" in api:
+                    async with aiofiles.open(f"BFD Summary/HTML/BFD Summary { device['deviceId'] }.html", mode='w') as f:
+                        await f.write(html_output)
+
+            for device in self.device_list['data']:
+                if f"/dataservice/device/bfd/sessions?deviceId={ device['deviceId'] }" in api:
+                    async with aiofiles.open(f"BFD Sessions From Device/HTML/BFD Sessions From { device['deviceId'] }.html", mode='w') as f:
+                        await f.write(html_output)
+
     async def mindmap_file(self, parsed_json):
         template_dir = Path(__file__).resolve().parent
         env = Environment(loader=FileSystemLoader(str(template_dir)), enable_async=True)
@@ -567,6 +666,21 @@ class vDocs():
             if api == "/dataservice/data/device/state/System":
                 async with aiofiles.open('System/Mindmap/System.md', mode='w' ) as f:
                     await f.write(mindmap_output)
+
+            for device in self.device_list['data']:
+                if f"/dataservice/device/arp?deviceId={ device['deviceId'] }" in api:
+                    async with aiofiles.open(f"ARP Interfaces/Mindmap/ARP Interfaces { device['deviceId'] }.md", mode='w') as f:
+                        await f.write(mindmap_output)
+
+            for device in self.device_list['data']:
+                if f"/dataservice/device/bfd/summary?deviceId={ device['deviceId'] }" in api:
+                    async with aiofiles.open(f"BFD Summary/Mindmap/BFD Summary { device['deviceId'] }.md", mode='w') as f:
+                        await f.write(mindmap_output)
+
+            for device in self.device_list['data']:
+                if f"/dataservice/device/bfd/sessions?deviceId={ device['deviceId'] }" in api:
+                    async with aiofiles.open(f"BFD Sessions From Device/Mindmap/BFD Sessions From { device['deviceId'] }.md", mode='w') as f:
+                        await f.write(mindmap_output)
 
     async def all_files(self, parsed_json):
         await asyncio.gather(self.json_file(parsed_json),
